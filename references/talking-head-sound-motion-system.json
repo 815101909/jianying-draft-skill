@@ -1,0 +1,465 @@
+{
+  "schema_version": 1,
+  "profile": "talking-head-sound-motion-pairing-system",
+  "source_audit": {
+    "roots": ["C:/drafts/talking-head-library", "C:/drafts/original-edit-library"],
+    "draft_files_scanned": 1319,
+    "encrypted_drafts_decrypted": 114,
+    "parse_errors": 0,
+    "placed_sound_segments_with_timeline_evidence": 1411,
+    "unique_placed_sound_names": 263,
+    "sound_material_instances": 1411,
+    "distilled_sound_families": 22,
+    "detailed_catalog": "references/talking-head-sound-scene-catalog.json",
+    "interpretation": "Exact co-occurrence is evidence, not a mandate. Use semantic role, visual motion, genre, and narration density together."
+  },
+  "catalog_lookup": {
+    "reference": "talking-head-sound-scene-catalog.json",
+    "coverage": "All 263 named sound effects placed across 1319 scanned draft_content.json files, including 114 authenticated encrypted drafts.",
+    "query_order": [
+      "Filter sound_scene_catalog by the intended semantic scene.",
+      "Prefer a family whose motion and genre match the current visual.",
+      "Compare animation_counts and samples for exact evidence.",
+      "Resolve a path already present in the target draft package or copy an authorized local asset deliberately.",
+      "Apply repetition, density, narration, and silence rules before placement."
+    ],
+    "confidence": {
+      "high": "Multiple placements with consistent scene and animation evidence.",
+      "medium": "One or more placements with coherent nearby dialogue or motion.",
+      "low": "Specific foley with sparse or contradictory context; require an on-screen action or explicit semantic justification."
+    }
+  },
+  "selection_order": [
+    "Identify the semantic beat: hook, identity, conflict, proof, method, comparison, transition, CTA, or reflective ending.",
+    "Choose the text animation first; sound should explain the same motion or semantic change.",
+    "Build a candidate pool from the semantic role and motion. Do not let the first locally resolved asset become the default for unrelated beats.",
+    "Choose one sound family and the lowest intensity that remains audible under narration.",
+    "Check recent exact-asset and family usage before placement. Prefer a different justified family or silence over repeating the same cue.",
+    "Align the perceptual transient to the animation's visible start, not mechanically to the subtitle segment boundary.",
+    "Use silence for ordinary captions and recovery beats.",
+    "Resolve a real local or licensed audio asset before writing an audio material or segment."
+  ],
+  "implementation_contract": {
+    "draft_structure": [
+      "Create a fresh materials.audios item with type=sound.",
+      "Place it through a fresh segment on a dedicated audio track.",
+      "Do not attach sound materials through text extra_material_refs.",
+      "Generate fresh runtime IDs for audio materials, segments, tracks, fades, and effects."
+    ],
+    "timing": {
+      "default_offset_from_animation_start_us": [0, 80000],
+      "pre_whoosh_offset_us": [-120000, 0],
+      "typing_can_follow_visible_character_reveal": true,
+      "trim_long_tail_when_it_masks_the_next_sentence": true
+    },
+    "mixing": {
+      "default_segment_volume": 1.5,
+      "default_last_nonzero_volume": 1.5,
+      "default_rule": "For newly added talking-head sound effects, write volume=1.5 and last_nonzero_volume=1.5 unless the user requests another level or preview reveals clipping.",
+      "subtle_relative_to_narration_db": [-16, -10],
+      "medium_relative_to_narration_db": [-12, -8],
+      "strong_relative_to_narration_db": [-9, -5],
+      "rule": "Duck or omit the cue when it competes with a consonant, emotional pause, or important spoken number."
+    },
+    "density": {
+      "ordinary_caption": "none",
+      "soft_documentary": "one cue per 12-25 seconds or major semantic transition",
+      "standard_talking_head": "one cue per 6-15 seconds, concentrated on hook, steps, proof, and CTA",
+      "high_packaging": "one cue per 3-8 seconds with recovery beats",
+      "rule": "Do not sonify every animated word."
+    },
+    "repetition_control": {
+      "default_exact_asset_max_per_30_seconds": 1,
+      "deliberate_motif_exact_asset_max_per_30_seconds": 2,
+      "exact_asset_cooldown_seconds": 12,
+      "same_family_cooldown_seconds": 6,
+      "max_same_family_per_30_seconds": 2,
+      "minimum_unique_families_for_3_to_4_cues": 2,
+      "minimum_unique_families_for_5_or_more_cues": 3,
+      "forbid_consecutive_same_asset": true,
+      "motif_exception": "Allow a second use only when the repeated sound intentionally marks the same recurring semantic event, not merely because the asset is available.",
+      "fallback_order": [
+        "Choose another asset in the same family when the motion still requires that family.",
+        "Choose another semantically valid family with comparable intensity.",
+        "Use silence."
+      ],
+      "audit_rule": "Before saving, group placed effects by resolved path and by family in rolling 30-second windows. Remove or replace any cue that exceeds these limits."
+    },
+    "asset_selection_policy": {
+      "generic_whoosh_is_not_default": true,
+      "rules": [
+        "Use whoosh_slide only for visible directional travel, wipe, comparison switch, or genuine chapter movement.",
+        "Do not use a whoosh for scale-only keywords, fades, static labels, proof numbers, or every text entrance.",
+        "Use ui_notification for small labels, steps, confirmations, or UI-like facts.",
+        "Use typing_texture for visible character reveal, AI text, definitions, messages, or search-like content.",
+        "Use impact for a decisive conclusion, contradiction, large number, or CTA peak.",
+        "Use premium_magic for a soft solution reveal or polished positive turn.",
+        "If no family explains the visible motion and semantic beat, use silence."
+      ]
+    },
+    "portability": [
+      "Preserve placeholder paths only inside their original portable draft package.",
+      "For a new draft, resolve the placeholder to a real copied asset or use an intentional licensed replacement.",
+      "Validate every materials.audios path and audio segment material_id before delivery.",
+      "Do not copy source-project branding, tutorial labels, or copyrighted music as a sound effect."
+    ]
+  },
+  "sound_families": {
+    "whoosh_slide": {
+      "source_names": ["“呼”2", "嗖，咻", "唰", "嗖", "呼"],
+      "use_when": ["horizontal reveal", "slide", "wipe", "comparison switch", "chapter transition"],
+      "preferred_animations": ["向右露出", "向左露出", "向右缓入", "向上滑动", "羽化向右擦开"],
+      "timing": "Start 0-120 ms before visible movement; let the transient land as the word reaches its final position.",
+      "intensity": "subtle_to_medium",
+      "avoid": ["static caption", "slow emotional quote", "every list item", "scale-only keyword", "using the same resolved whoosh asset more than once in a 30-second window unless it is a deliberate motif"],
+      "observed_evidence": [
+        {"sound": "“呼”2", "animation": "向右露出", "count": 2},
+        {"sound": "“呼”2", "animation": "新年打字机", "count": 1}
+      ]
+    },
+    "ui_notification": {
+      "source_names": ["一滴水滴声", "叮咚，提示音1", "滴，提示音", "叮", "鼠标单击"],
+      "use_when": ["numbered step", "data point", "UI state", "fact confirmation", "small label"],
+      "preferred_animations": ["向下露出", "向右露出", "滚入", "逐字显影"],
+      "timing": "Put the click or chime on the first fully readable frame.",
+      "intensity": "subtle",
+      "avoid": ["grief", "death", "serious warning", "continuous narration"],
+      "observed_evidence": [
+        {"sound": "一滴水滴声", "animation": "向右露出", "count": 1},
+        {"sound": "叮咚，提示音1", "animation": "向下露出", "count": 1}
+      ]
+    },
+    "typing_texture": {
+      "source_names": ["打字声", "键盘打字长音效2", "打字机打字声（长）"],
+      "use_when": ["quote", "search query", "message", "definition", "AI or computer text", "memory or diary"],
+      "preferred_animations": ["打字光标", "逐字显影", "新年打字机", "发光模糊"],
+      "timing": "Follow character reveal; trim immediately after the last visible character.",
+      "intensity": "subtle",
+      "avoid": ["large impact word", "fast multi-line list", "more than two consecutive sentences"],
+      "observed_evidence": [
+        {"sound": "打字声", "animation": "发光模糊", "count": 1}
+      ]
+    },
+    "impact": {
+      "source_names": ["咚", "哐，撞击轻响", "重拳击打", "撞击轻响"],
+      "use_when": ["decisive conclusion", "large number", "strong contradiction", "chapter peak", "CTA hit"],
+      "preferred_animations": ["缩小", "轻微放大", "放大", "弹簧"],
+      "timing": "Align the main transient to maximum scale or the final settled word.",
+      "intensity": "medium; strong only for kinetic or variety profiles",
+      "avoid": ["cinematic reflection", "ordinary chapter label", "sensitive personal story"],
+      "observed_evidence": [
+        {"sound": "咚", "animation": "缩小", "count": 1}
+      ]
+    },
+    "premium_magic": {
+      "source_names": ["仙尘音效", "闪光灯", "星光闪闪", "水滴"],
+      "use_when": ["premium reveal", "beauty result", "soft insight", "elegant chapter", "solution turn"],
+      "preferred_animations": ["晕开", "雪光模糊", "发光模糊", "流光扩散", "渐显"],
+      "timing": "Place the sparkle after the first readable frame; preserve the tail only in visual breathing space.",
+      "intensity": "subtle",
+      "avoid": ["hard warning", "legal fact", "dense data"],
+      "observed_evidence": []
+    },
+    "paper_page": {
+      "source_names": ["纸张抖动声", "翻页", "纸张"],
+      "use_when": ["document", "diary", "checklist", "quote card", "chapter page"],
+      "preferred_animations": ["打字光标", "逐字显影", "新年打字机", "向右露出"],
+      "timing": "Start with the page movement; text may begin 50-150 ms later.",
+      "intensity": "subtle",
+      "avoid": ["digital UI", "large number impact"],
+      "observed_evidence": [
+        {"sound": "纸张抖动声", "animation": "新年打字机", "count": 1}
+      ]
+    },
+    "camera_scene": {
+      "source_names": ["相机快门", "闪回", "开门声"],
+      "use_when": ["photo evidence", "case reveal", "memory flashback", "entering a new chapter or place"],
+      "preferred_animations": ["开幕", "向下露出", "渐显", "闪回式画面转场"],
+      "timing": "Use the transient on the cut or first new frame, not merely on text appearance.",
+      "intensity": "subtle_to_medium",
+      "avoid": ["repeated method labels", "calm continuous explanation"],
+      "observed_evidence": [
+        {"sound": "开门声", "animation": "向下露出", "count": 1}
+      ]
+    },
+    "money_value": {
+      "source_names": ["叮，收银机提示音1", "金币碰撞", "收银机"],
+      "use_when": ["price", "revenue", "conversion", "commercial result", "cost comparison"],
+      "preferred_animations": ["滚入", "轻微放大", "数字翻转", "向上滑动"],
+      "timing": "Align to the number becoming readable.",
+      "intensity": "subtle_to_medium",
+      "avoid": ["non-commercial documentary", "death or identity topic", "every monetary mention"],
+      "observed_evidence": [
+        {"sound": "叮，收银机提示音1", "animation": "none", "count": 1}
+      ]
+    },
+    "risk_break": {
+      "source_names": ["错误", "玻璃破碎声2", "撞击回响-悬疑转场"],
+      "use_when": ["prohibition", "failure", "myth break", "risk escalation", "hard contradiction"],
+      "preferred_animations": ["呐喊声波", "放大", "故障", "碎裂", "缩小"],
+      "timing": "Put the transient on the contradiction word or visual break.",
+      "intensity": "medium",
+      "avoid": ["minor caveat", "soft education", "frequent repetition"],
+      "observed_evidence": []
+    },
+    "pop_cartoon": {
+      "source_names": ["啵", "卡通跳跃", "综艺咚"],
+      "use_when": ["light reaction", "cute label", "before/after", "playful answer"],
+      "preferred_animations": ["弹簧", "跃进", "弹出", "收拢"],
+      "timing": "Align to the bounce apex or settled state.",
+      "intensity": "medium",
+      "avoid": ["finance authority", "legal warning", "cinematic documentary", "serious personal story"],
+      "observed_evidence": []
+    },
+    "time_tick": {
+      "source_names": ["时钟嘀嗒声4", "时钟", "滴答"],
+      "use_when": ["countdown", "waiting", "deadline", "time-scale comparison", "suspense pause"],
+      "preferred_animations": ["数字翻转", "滚入", "向右缓入", "渐显"],
+      "timing": "Use a short motif across the time comparison; stop before narration resumes.",
+      "intensity": "subtle",
+      "avoid": ["long continuous bed under speech", "unrelated chapter titles"],
+      "observed_evidence": []
+    },
+    "suspense_texture": {
+      "source_names": ["诡异的滴水声", "综艺悬疑 不对劲", "综艺紧张噔噔", "综艺悬疑 沙锤长", "发条转动", "综艺影视紧张回响", "综艺 悬疑 轻敲", "大明王朝悬疑"],
+      "use_when": ["unanswered question", "identity crisis", "mystery", "philosophical turn", "reflective ending"],
+      "preferred_animations": ["渐显", "逐字显影", "晕开", "缩小"],
+      "timing": "Treat as a short texture or transition bed, not a punctuation hit.",
+      "intensity": "subtle",
+      "avoid": ["data list", "rapid UI labels", "masking narration"],
+      "observed_evidence": [{"catalog_family": "suspense_texture", "segment_count": 187}]
+    },
+    "bell_chime": {
+      "source_names": ["一声响铃", "风铃声", "一声亮铃清脆迷惑铃音铃铛", "风铃 魔法转场", "木鱼敲击回响音效", "敲响西藏颂钵"],
+      "use_when": ["insight landing", "soft reveal", "elegant identity", "mindfulness beat", "positive confirmation"],
+      "preferred_animations": ["发光模糊", "雪光模糊", "渐显", "缩小"],
+      "timing": "Land the bright transient on the first readable or settled frame; preserve a tail only when dialogue leaves room.",
+      "intensity": "subtle",
+      "avoid": ["hard warning", "dense method list", "repeating every positive word"],
+      "observed_evidence": [{"catalog_family": "bell_chime", "segment_count": 59}]
+    },
+    "transition_reveal": {
+      "source_names": ["回忆-刷一下", "旋风", "“呼”的转场音效", "高音闪光转场", "扫光音效4", "扫光", "空灵转场音效", "突然出现音效"],
+      "use_when": ["visual scene change", "memory reveal", "chapter transition", "full-frame wipe", "object entrance"],
+      "preferred_animations": ["向右模糊 II", "向左模糊", "冰雪飘动", "渐显", "缩小"],
+      "timing": "Start with the visible transition and land on the new scene or completed reveal.",
+      "intensity": "subtle_to_medium",
+      "avoid": ["ordinary subtitle entrance", "scale-only keyword", "using transition audio without a visible transition"],
+      "observed_evidence": [{"catalog_family": "transition_reveal", "segment_count": 138}]
+    },
+    "comedy_variety": {
+      "source_names": ["综艺咚", "综艺开头-咚（空旷）", "综艺清脆敲声", "综艺拉扯", "综艺 沙锤", "Tom鼓", "综艺嗖咻刷"],
+      "use_when": ["reaction", "awkward beat", "playful contradiction", "variety punchline", "light ridicule"],
+      "preferred_animations": ["波浪弹入", "向左模糊", "向右露出", "吸入", "渐显"],
+      "timing": "Use on the reaction or punchline, not under setup dialogue.",
+      "intensity": "medium",
+      "avoid": ["finance authority", "legal warning", "serious personal story", "documentary reflection"],
+      "observed_evidence": [{"catalog_family": "comedy_variety", "segment_count": 92}]
+    },
+    "bubble_stamp": {
+      "source_names": ["气泡弹出", "啵，气泡音2", "综艺嘭字幕音效震撼出场", "嘭！盖章音效素材", "卡通弹簧拉伸"],
+      "use_when": ["chat bubble", "badge", "stamp", "short answer", "small card pop"],
+      "preferred_animations": ["晕开", "放大", "轻微放大", "吸入", "向左模糊"],
+      "timing": "Align to the bubble reaching readable scale or the stamp touching down.",
+      "intensity": "subtle_to_medium",
+      "avoid": ["long sentence", "serious warning", "every label"],
+      "observed_evidence": [{"catalog_family": "bubble_stamp", "segment_count": 44}]
+    },
+    "mechanical_weapon": {
+      "source_names": ["枪拉栓", "拔刀 游戏音效 宝剑出鞘", "匕首", "刀子捅人", "刀光", "机关枪连打音效"],
+      "use_when": ["literal weapon action", "sharp competitive metaphor", "hard cut", "decisive reveal with matching visual"],
+      "preferred_animations": ["折叠", "向右缓入", "缩小", "滚入"],
+      "timing": "Synchronize to the visible mechanical action or sharp reveal.",
+      "intensity": "medium_to_strong",
+      "avoid": ["generic business keyword", "sensitive violence topic without matching visual", "frequent repetition"],
+      "observed_evidence": [{"catalog_family": "mechanical_weapon", "segment_count": 29}]
+    },
+    "retro_media": {
+      "source_names": ["复古胶片滚动", "卡式录音机磁带倒带或者快进", "投影仪放映声音音效"],
+      "use_when": ["archive", "flashback", "old media", "historical quote", "rewind or recap"],
+      "preferred_animations": ["滚入", "放大", "呐喊声波", "渐显"],
+      "timing": "Begin with the media motion and end or trim before current-time narration resumes.",
+      "intensity": "subtle",
+      "avoid": ["modern UI", "ordinary chapter", "unrelated nostalgia"],
+      "observed_evidence": [{"catalog_family": "retro_media", "segment_count": 6}]
+    },
+    "technology_ui": {
+      "source_names": ["off", "综艺开始 系统音", "高科技 显示出来", "故障音效", "故障音", "电子音"],
+      "use_when": ["AI interface", "system state", "device on or off", "scan", "digital error", "technology reveal"],
+      "preferred_animations": ["激光雕刻", "故障", "放大", "吸入", "渐显"],
+      "timing": "Place the transient on the state change or first stable interface frame.",
+      "intensity": "subtle_to_medium",
+      "avoid": ["non-digital emotional quote", "every mention of AI without a UI-like visual"],
+      "observed_evidence": [{"catalog_family": "technology_ui", "segment_count": 14}]
+    },
+    "emotion_human": {
+      "source_names": ["小孩哭泣声", "心碎声", "婴儿开心"],
+      "use_when": ["literal human reaction", "family story", "emotion reenactment", "character memory"],
+      "preferred_animations": ["生长 II", "翻动", "渐显"],
+      "timing": "Follow the depicted human reaction; keep narration intelligible.",
+      "intensity": "subtle",
+      "avoid": ["using emotion sounds as decorative punctuation", "mocking real distress"],
+      "observed_evidence": [{"catalog_family": "emotion_human", "segment_count": 4}]
+    },
+    "ambient_foley": {
+      "source_names": ["开门声", "交通 车辆引擎 汽车发动"],
+      "use_when": ["literal environment action", "entering a place", "vehicle start", "scene realism"],
+      "preferred_animations": ["向下露出", "开幕", "向上重叠", "向上露出"],
+      "timing": "Synchronize to the visible action or scene cut, not to unrelated text.",
+      "intensity": "subtle_to_medium",
+      "avoid": ["abstract keyword", "off-screen action with no narrative need"],
+      "observed_evidence": [{"catalog_family": "ambient_foley", "segment_count": 9}]
+    },
+    "specific_foley": {
+      "source_names": ["See talking-head-sound-scene-catalog.json for all sparse exact assets"],
+      "use_when": ["a literal or strongly implied on-screen action has an exact matching sound"],
+      "preferred_animations": [],
+      "timing": "Use the detailed catalog sample and synchronize to the physical or semantic action.",
+      "intensity": "context_dependent",
+      "avoid": ["generic fallback", "selection by novelty alone", "using sparse evidence without matching action"],
+      "observed_evidence": [{"catalog_family": "specific_foley", "segment_count": 81}],
+      "rule": "Require an exact-name catalog lookup. Never choose this family from a broad semantic label alone."
+    }
+  },
+  "semantic_role_pairings": {
+    "opening_hook": {
+      "preferred": [
+        {"animation": "逐字显影", "sound_family": "typing_texture"},
+        {"animation": "向右露出", "sound_family": "whoosh_slide"},
+        {"animation": "轻微放大", "sound_family": "impact"}
+      ],
+      "sound_optional": false
+    },
+    "chapter": {
+      "preferred": [
+        {"animation": "晕开", "sound_family": "premium_magic"},
+        {"animation": "向右缓入", "sound_family": "whoosh_slide"},
+        {"animation": "渐显", "sound_family": "suspense_texture"}
+      ],
+      "sound_optional": true
+    },
+    "method_step": {
+      "preferred": [
+        {"animation": "向下露出", "sound_family": "ui_notification"},
+        {"animation": "向右露出", "sound_family": "whoosh_slide"}
+      ],
+      "sound_optional": false
+    },
+    "proof_or_number": {
+      "preferred": [
+        {"animation": "滚入", "sound_family": "ui_notification"},
+        {"animation": "轻微放大", "sound_family": "impact"}
+      ],
+      "sound_optional": false
+    },
+    "comparison_or_switch": {
+      "preferred": [
+        {"animation": "羽化向右擦开", "sound_family": "whoosh_slide"},
+        {"animation": "向右缓入", "sound_family": "whoosh_slide"}
+      ],
+      "sound_optional": true
+    },
+    "conflict_or_warning": {
+      "preferred": [
+        {"animation": "缩小", "sound_family": "impact"},
+        {"animation": "放大", "sound_family": "risk_break"}
+      ],
+      "sound_optional": false
+    },
+    "soft_emotional_quote": {
+      "preferred": [
+        {"animation": "渐显", "sound_family": "suspense_texture"},
+        {"animation": "逐字显影", "sound_family": "typing_texture"}
+      ],
+      "sound_optional": true
+    },
+    "cta": {
+      "preferred": [
+        {"animation": "轻微放大", "sound_family": "impact"},
+        {"animation": "向上露出", "sound_family": "ui_notification"}
+      ],
+      "sound_optional": false
+    },
+    "reflective_ending": {
+      "preferred": [
+        {"animation": "渐显", "sound_family": "suspense_texture"},
+        {"animation": "逐字显影", "sound_family": "typing_texture"}
+      ],
+      "sound_optional": true,
+      "rule": "Silence is often stronger than a final hit."
+    },
+    "surprise_or_reaction": {
+      "preferred": [
+        {"animation": "晕开", "sound_family": "bubble_stamp"},
+        {"animation": "波浪弹入", "sound_family": "comedy_variety"},
+        {"animation": "发光模糊", "sound_family": "bell_chime"}
+      ],
+      "sound_optional": true
+    },
+    "memory_or_archive": {
+      "preferred": [
+        {"animation": "渐显", "sound_family": "retro_media"},
+        {"animation": "向左模糊", "sound_family": "transition_reveal"},
+        {"animation": "逐字显影", "sound_family": "typing_texture"}
+      ],
+      "sound_optional": true
+    },
+    "technology_or_ai_ui": {
+      "preferred": [
+        {"animation": "激光雕刻", "sound_family": "technology_ui"},
+        {"animation": "逐字显影", "sound_family": "typing_texture"},
+        {"animation": "滚入", "sound_family": "ui_notification"}
+      ],
+      "sound_optional": true
+    },
+    "literal_action_or_scene": {
+      "preferred": [
+        {"animation": "开幕", "sound_family": "ambient_foley"},
+        {"animation": "折叠", "sound_family": "mechanical_weapon"},
+        {"animation": "none", "sound_family": "specific_foley"}
+      ],
+      "sound_optional": true,
+      "rule": "Require a visible or explicit action and verify the exact asset in the detailed catalog."
+    },
+    "soft_positive_reveal": {
+      "preferred": [
+        {"animation": "雪光模糊", "sound_family": "bell_chime"},
+        {"animation": "发光模糊", "sound_family": "premium_magic"},
+        {"animation": "渐显", "sound_family": "bell_chime"}
+      ],
+      "sound_optional": true
+    }
+  },
+  "visual_family_profiles": {
+    "documentary_news_explainer": {
+      "priorities": ["whoosh_slide", "ui_notification", "camera_scene"],
+      "avoid": ["pop_cartoon", "strong impact repetition"],
+      "density": "soft_documentary"
+    },
+    "cinematic_person_story": {
+      "priorities": ["typing_texture", "suspense_texture", "paper_page", "premium_magic"],
+      "avoid": ["money_value", "pop_cartoon", "heavy impact"],
+      "density": "soft_documentary"
+    },
+    "data_infographic": {
+      "priorities": ["ui_notification", "whoosh_slide", "time_tick"],
+      "avoid": ["long texture tails"],
+      "density": "standard_talking_head"
+    },
+    "kinetic_viral_typography": {
+      "priorities": ["impact", "whoosh_slide", "ui_notification"],
+      "avoid": ["sound on every word"],
+      "density": "high_packaging"
+    },
+    "variety_reaction": {
+      "priorities": ["pop_cartoon", "impact", "risk_break"],
+      "avoid": ["solemn documentary texture"],
+      "density": "high_packaging"
+    },
+    "lifestyle_xiaohongshu": {
+      "priorities": ["premium_magic", "pop_cartoon", "ui_notification"],
+      "avoid": ["heavy impact repetition"],
+      "density": "standard_talking_head"
+    }
+  }
+}

@@ -1,0 +1,330 @@
+{
+  "schema_version": 1,
+  "profile": "high-packaging-original-edit-system",
+  "source_audit": {
+    "root": "C:/drafts/original-edit-library",
+    "main_projects": 40,
+    "draft_files_including_subdrafts": 1169,
+    "unique_drafts": 1146,
+    "duplicate_drafts_skipped": 23,
+    "parse_errors": 0,
+    "text_segments": 1358,
+    "style_clusters": 663,
+    "independent_text_segments": 959,
+    "spoken_subtitle_segments": 399,
+    "animated_text_segments": 567,
+    "canvas_distribution": {"vertical": 22, "horizontal": 17, "square": 1},
+    "interpretation": "This is a full-edit packaging library. Independent kinetic text, compound clips, montage, masks, graphics, and sound cues carry more weight than continuous subtitles."
+  },
+  "use_when": [
+    "The user asks for 一创、高包装、爆款包装、混剪、人物故事、纪录感、综艺花字、信息图解、小红书感、Vlog包装, or a heavily designed edit.",
+    "A talking-head video needs more than a stable lower-third subtitle and should use semantic text hits, B-roll, compound cards, or sound-synchronized motion.",
+    "A reference edit should be reverse-engineered into transferable visual grammar instead of copied shot for shot."
+  ],
+  "do_not_use_when": [
+    "The user only needs clean readable captions; use talking-head-industry-style-system.json instead.",
+    "The source has no safe visual space and the user has not authorized reframing, B-roll, or overlays.",
+    "Required native resources are unresolved; replace them with portable keyframes or omit them."
+  ],
+  "selection_order": [
+    "Choose a visual_family from output intent, not industry alone.",
+    "Choose one base subtitle identity and one accent font family.",
+    "Mark the script beats: hook, setup, identity, conflict, data, method, turn, result, CTA or reflective ending.",
+    "Assign at most one primary text role to each beat.",
+    "Choose position from face, hand gesture, B-roll subject, and blank-space analysis.",
+    "Choose motion intensity and a matching sound family.",
+    "Build compound components only for relationships that need a card, diagram, comparison, timeline, or device UI.",
+    "Validate animation, effect, font, audio, media, and subdraft references before delivery."
+  ],
+  "factor_model": {
+    "base_text_identity": ["font", "font_id", "size", "fill", "bold", "italic", "letter_spacing", "line_spacing", "stroke", "shadow", "background", "alignment", "position", "scale"],
+    "semantic_role": ["spoken_subtitle", "opening_hook", "identity", "keyword", "pain_or_conflict", "turn", "proof_or_number", "method_step", "quote", "chapter", "cta", "source_or_note"],
+    "hierarchy": ["annotation", "base_subtitle", "keyword", "headline", "giant_concept_word"],
+    "layout": ["centered_two_line", "one_phrase_per_beat", "left_right_comparison", "number_plus_unit", "numbered_list", "timeline", "side_identity", "persistent_topic", "vertical_teaser", "tracked_object_label"],
+    "motion": ["in", "loop", "out", "duration", "resource_path", "semantic_pairing"],
+    "rhythm": ["first_three_seconds_density", "emphasis_interval", "minimum_read_time", "strong_hit_spacing", "subtitle_to_overlay_ratio", "ending_type"],
+    "color_semantics": ["body", "warm_emphasis", "value_or_number", "risk", "emotion", "information", "creative_accent", "background_contrast"],
+    "font_personality": ["documentary", "literary", "authority", "viral", "youth", "handwritten", "cute", "cinematic"],
+    "picture_coordination": ["face_safe_zone", "mouth_safe_zone", "gesture_safe_zone", "subject_side", "blank_field", "foreground_occlusion", "camera_motion", "background_complexity"],
+    "sound_pairing": ["whoosh", "impact", "pop", "notification", "typing", "sparkle", "error", "suspense", "texture"],
+    "compound_component": ["person_card", "data_card", "device_ui", "comparison", "timeline", "comment_capture", "news_strip", "vlog_metadata", "quote_card", "chapter_transition", "mask_transition"],
+    "portability": ["font_exists", "animation_cache_exists", "effect_cache_exists", "audio_exists", "media_exists", "subdraft_resolves"]
+  },
+  "visual_families": {
+    "documentary_news_explainer": {
+      "projects": ["拆解工程8", "拆解工程10", "拆解工程11", "拆解工程13", "拆解工程16", "拆解工程32", "拆解工程34", "拆解工程38"],
+      "use_when": "Finance, current affairs, social observation, factual explanation, interviews, or B-roll-led narration.",
+      "grammar": "Small stable white captions, restrained motion, high B-roll and compound-clip dependence.",
+      "font_priority": ["后现代体.otf", "zh-hans.ttf", "SourceHanSerifSC-Regular.otf", "SourceHanSerifSC-Bold.otf"],
+      "base_size_range": [7, 13],
+      "accent_roles": ["opening_hook", "proof_or_number", "location_or_institution"],
+      "motion_priority": ["fade_in", "slide_up", "slow_in_right"],
+      "avoid": "Do not cover every sentence with a large keyword."
+    },
+    "cinematic_person_story": {
+      "projects": ["拆解工程1", "拆解工程14", "拆解工程17", "拆解工程24", "拆解工程26", "拆解工程29", "拆解工程30", "拆解工程40"],
+      "use_when": "人物故事、情绪观点、关系议题、品牌纪录片、访谈金句或带余味的叙事。",
+      "grammar": "Break narration into short phrases, use serif or thin fonts, cream/coral accents, fade/typewriter/water-ink motion, and intentional negative space.",
+      "font_priority": ["SourceHanSerifCN-Heavy.otf", "SourceHanSerifCN-Light.otf", "阳煦体.otf", "雅月体.ttf", "细体-思源黑体7号.otf"],
+      "palette_priority": ["white", "soft_cream", "coral", "deep_red"],
+      "motion_priority": ["fade_in", "typewriter_i", "random_fall", "ink_spread", "shrink"],
+      "ending_priority": ["reflective_quote", "visual_hold", "fade_out"]
+    },
+    "kinetic_viral_typography": {
+      "projects": ["拆解工程2", "拆解工程7", "拆解工程9", "拆解工程12", "拆解工程15", "拆解工程20", "拆解工程21", "拆解工程22", "拆解工程33", "拆解工程35", "拆解工程39"],
+      "use_when": "High-retention opinions, editing education, beauty analysis, creator content, or rapid commercial storytelling.",
+      "grammar": "One phrase per beat, extreme size contrast, multiple screen zones, zoom/spring/slide/wipe motion, and sound hits.",
+      "font_priority": ["特黑体-思源黑体1号.otf", "HelloFont ID YouQiTi.ttf", "FZCuJinLJW.ttf", "新青年体.ttf", "造字工房俊雅体.ttf"],
+      "size_range": [15, 100],
+      "palette_priority": ["white", "pale_yellow", "orange", "deep_red", "coral", "light_blue"],
+      "motion_priority": ["zoom_in", "spring", "slide_up", "slide_left", "slide_right", "wipe_right", "pop_out"],
+      "sound_priority": ["impact", "whoosh", "pop", "notification"],
+      "avoid": "Do not run strong animation continuously; leave recovery beats."
+    },
+    "data_infographic": {
+      "projects": ["拆解工程13", "拆解工程17", "拆解工程20", "拆解工程22", "拆解工程37"],
+      "use_when": "Amounts, percentages, years, rankings, process stages, comparisons, or evidence.",
+      "grammar": "Large number plus smaller unit, aligned rows, timelines, chapter numbers, and restrained supporting labels.",
+      "font_priority": ["特黑体-思源黑体1号.otf", "HelloFont ID YouQiTi.ttf", "后现代体.otf"],
+      "number_size_range": [27, 80],
+      "label_size_range": [8, 18],
+      "palette_priority": ["warm_yellow", "white", "orange", "pale_yellow"],
+      "motion_priority": ["roll_or_flip", "slow_in_right", "slide_up", "reveal_right"],
+      "rule": "Animate the relationship or change, not only the glyphs."
+    },
+    "variety_reaction": {
+      "projects": ["拆解工程4", "拆解工程6", "拆解工程15", "拆解工程18", "拆解工程31", "拆解工程36"],
+      "use_when": "Comedy, reaction, light education, tests, before/after, or deliberately playful edits.",
+      "grammar": "Rounded/cartoon fonts, outlines, reaction text, bounce/shake/wave motion, and dense sound punctuation.",
+      "font_priority": ["圆体-汉仪中圆简.ttf", "新青年体.ttf", "得意黑.ttf", "仓耳与墨W05.ttf"],
+      "palette_priority": ["white", "pastel_green", "pastel_yellow", "black_outline"],
+      "motion_priority": ["spring", "shout_wave", "shake", "wave", "zoom_in"],
+      "sound_priority": ["pop", "impact", "cartoon_jump", "error", "variety_start"]
+    },
+    "lifestyle_xiaohongshu": {
+      "projects": ["拆解工程18", "拆解工程24", "拆解工程33", "拆解工程35", "拆解工程39"],
+      "use_when": "Beauty, women's growth, health, lifestyle, self-improvement, or Xiaohongshu-like advice.",
+      "grammar": "Warm and pastel palette, handwritten or rounded accents, large short keywords, elastic entrances, and intimate pacing.",
+      "font_priority": ["HelloFont ID YouQiTi.ttf", "字语漫雅手书.ttf", "圆体-汉仪中圆简.ttf", "SourceHanSerifCN-Heavy.otf"],
+      "palette_priority": ["cream", "soft_green", "light_blue", "warm_red", "white"],
+      "motion_priority": ["spring", "gather", "jump_in", "fade_in", "slow_in_right"],
+      "avoid": "Avoid finance-style hard yellow/red throughout the video."
+    },
+    "tutorial_deconstruction_overlay": {
+      "projects": ["拆解工程3", "拆解工程4", "拆解工程5", "拆解工程6", "拆解工程23", "拆解工程25", "拆解工程31", "拆解工程36"],
+      "use_when": "Internal learning, editing breakdown, asset replacement, font/effect notes, or implementation guidance.",
+      "grammar": "Instruction labels, source notes, effect names, replacement directions, and learning-only watermarks.",
+      "export_rule": "Exclude from audience-facing output unless the user explicitly asks for a tutorial overlay.",
+      "filter_patterns": ["仅供学习使用", "仅供个人学习使用", "替换素材", "字体：", "音效：", "画面效果", "视频原创", "剪映制作", "工程内内容均可修改", "一创有料"]
+    },
+    "visual_montage_vlog": {
+      "projects": ["拆解工程19", "拆解工程27", "拆解工程28vlog"],
+      "use_when": "Vlog, visual transition piece, montage, mask-led sequence, or an abstract concept opener.",
+      "grammar": "Minimal continuous text, heavy compound clips and masks, giant concept words only at chapter peaks.",
+      "motion_priority": ["suck_in", "flip_out", "fade_out"],
+      "rule": "Let image structure carry the sequence; text is a chapter marker, not narration."
+    }
+  },
+  "typography_hierarchy": {
+    "annotation": {"size_range": [5, 10], "use_when": "Source, UI note, caption, or tutorial annotation."},
+    "base_subtitle": {"size_range": [8, 15], "use_when": "Continuous speech and facts."},
+    "keyword": {"size_range": [15, 30], "use_when": "Short semantic emphasis, name, object, or turn."},
+    "headline_or_number": {"size_range": [30, 80], "use_when": "Hook, proof, data, strong conclusion, or reaction."},
+    "giant_concept_word": {"size_range": [80, 144], "use_when": "One conceptual chapter word in a visual montage."},
+    "simultaneous_level_limit": 3,
+    "rule": "Enlarge payload words only; keep connectors, units, and explanatory text smaller."
+  },
+  "palette_semantics": {
+    "white": {"rgb": [1.0, 1.0, 1.0], "role": "Body, fact, neutral headline."},
+    "deep_red": {"rgb": [0.717647, 0.109804, 0.109804], "role": "Conflict, warning, pain, or decisive negative conclusion."},
+    "pale_yellow": {"rgb": [1.0, 0.960784, 0.537255], "role": "Warm keyword, identity, or gentle emphasis."},
+    "orange": {"rgb": [1.0, 0.658824, 0.0], "role": "Action, energetic contrast, or tutorial focus."},
+    "coral": {"rgb": [0.996078, 0.541176, 0.501961], "role": "Emotional warning, person-story emphasis, or feminine accent."},
+    "soft_cream": {"rgb": [0.976471, 0.952941, 0.768627], "role": "Literary, premium, reflective, or lifestyle emphasis."},
+    "soft_purple": {"rgb": [0.298039, 0.247059, 0.776471], "role": "Creative or youthful chapter identity."},
+    "light_blue": {"rgb": [0.803922, 0.909804, 0.992157], "role": "Information, technology, or clean aesthetic support."},
+    "black": {"rgb": [0.0, 0.0, 0.0], "role": "Light-background text, outline, or contrast panel."}
+  },
+  "font_personality": {
+    "SourceHanSerifCN-Heavy.otf": "人物故事、权威观点、电影感金句。",
+    "SourceHanSerifCN-Light.otf": "文学、回忆、克制的情绪叙事。",
+    "后现代体.otf": "新闻、财经、社会观察、极简概念字。",
+    "特黑体-思源黑体1号.otf": "爆款结论、数据和强冲击标题。",
+    "HelloFont ID YouQiTi.ttf": "小红书、创作者、年轻化高包装。",
+    "FZCuJinLJW.ttf": "粗重信息字、数字、快节奏关键词。",
+    "新青年体.ttf": "综艺、测评、快速反应和年轻内容。",
+    "造字工房俊雅体.ttf": "美学、人物观点、教育或文化内容。",
+    "圆体-汉仪中圆简.ttf": "可爱、健康、综艺、轻松科普。",
+    "雅月体.ttf": "手账感、个人成长和亲密表达。",
+    "细体-思源黑体7号.otf": "电影感注释、人物信息和留白叙事。"
+  },
+  "motion_catalog": {
+    "fade_in": {"name": "渐显", "source_id": "6724916044072227332", "role": "纪实、情绪、金句、柔和信息。"},
+    "zoom_in": {"name": "放大", "source_id": "6724919499042066958", "role": "结论、冲突、数字、物体出现。"},
+    "slide_up": {"name": "向上滑动", "source_id": "6763470111253729803", "role": "信息升级、列表、增长、章节。"},
+    "spring": {"name": "弹簧", "source_id": "6884154692398486023", "role": "综艺、小红书、轻松关键词。"},
+    "pop_out": {"name": "弹出", "source_id": "6887482090351235592", "type": "out", "role": "弹性关键词快速退场。"},
+    "slide_right": {"name": "向右滑动", "source_id": "6724920136056181256", "role": "比较、流程和横向转场。"},
+    "slide_left": {"name": "向左滑动", "source_id": "6763470195894784525", "role": "比较、流程和横向转场。"},
+    "fade_out": {"name": "渐隐", "source_id": "6724919382104871427", "type": "out", "role": "情绪收尾和章节结束。"},
+    "snow_blur": {"name": "雪光模糊", "source_id": "7314614905196253705", "role": "重点概念、精致感和高级感。"},
+    "slow_in_right": {"name": "向右缓入", "source_id": "7043778124760224292", "role": "人物信息、标签和克制解释。"},
+    "sunrise": {"name": "日出", "source_id": "6779084126457696776", "role": "章节、希望感和情绪升起。"},
+    "shout_wave": {"name": "呐喊声波", "source_id": "7199943069385364005", "role": "冲突和综艺反应。"},
+    "suck_in": {"name": "吸入", "source_id": "7120438380453696031", "role": "视觉转换和概念收拢。"},
+    "jump_in": {"name": "跃进", "source_id": "7220685840442200634", "role": "短促关键词和小红书强调。"},
+    "shrink": {"name": "缩小", "source_id": "6724921217721045515", "role": "结论出现、电影感短语。"},
+    "wipe_right": {"name": "向右擦除", "source_id": "6771288500240126478", "role": "章节揭示、对比和美容分析。"},
+    "blur_right_ii": {"name": "向右模糊 II", "source_id": "7254503374622560828", "role": "轻快标签、生活方式和信息切换。"},
+    "typewriter_i": {"name": "打字机 I", "source_id": "6724920249654710791", "role": "引用、观点建立和人物叙事。"},
+    "reveal_right": {"name": "向右露出", "source_id": "7163514730525495839", "role": "标题、方法步骤和信息卡。"},
+    "vertical_gradient_loop": {"name": "竖向渐变", "source_id": "7430669972088558090", "type": "loop", "role": "持续的小红书式重点状态。"}
+  },
+  "sound_grammar": {
+    "source_sound_materials": 252,
+    "common_source_names": ["唰", "滴，提示音", "闪光灯", "鼠标单击", "仙尘音效", "啵", "重拳击打", "大明王朝悬疑", "哐，撞击轻响", "叮", "闪回", "叮咚", "键盘打字长音效2", "金币碰撞", "玻璃破碎声2", "综艺开始 系统音", "时钟嘀嗒声4", "相机快门"],
+    "pairings": {
+      "slide_or_wipe": ["唰", "嗖", "呼"],
+      "zoom_or_large_word": ["重拳击打", "哐，撞击轻响", "咚"],
+      "spring_or_pop": ["啵", "卡通跳跃", "综艺咚"],
+      "data_or_ui": ["滴，提示音", "叮", "叮咚", "鼠标单击"],
+      "typewriter": ["键盘打字长音效2", "打字机打字声（长）"],
+      "premium_or_magic": ["仙尘音效", "闪光灯", "水滴"],
+      "risk_or_break": ["错误", "玻璃破碎声2", "撞击回响-悬疑转场"],
+      "money_or_value": ["金币碰撞", "叮咚"],
+      "rule": "Use sound on semantic transitions and strong visual hits; do not sonify every caption."
+    }
+  },
+  "effect_catalog": {
+    "tutorial_label_effect": {"type": "text_effect", "source_effect_id": "7272741033979546943", "observed_count": 146},
+    "cinematic_serif_effect": {"type": "text_effect", "source_effect_id": "7160601239800040712", "observed_count": 88},
+    "bloom": {"type": "bloom", "source_effect_id": "7202575978646737469", "observed_count": 27},
+    "rule": "An effectStyle id inside content.styles is not enough. Create or reuse the matching materials.effects item and attach its fresh runtime id through extra_material_refs."
+  },
+  "role_blueprints": {
+    "documentary_caption": {
+      "source_project": "拆解工程10",
+      "use_when": "Stable news or documentary narration.",
+      "material_type": "subtitle",
+      "position": {"x": 0.0, "y": -0.10141},
+      "style": {
+        "fill": [1.0, 1.0, 1.0],
+        "size": 13,
+        "italic": true,
+        "font_file": "后现代体.otf",
+        "font_id": "6740435494053614093",
+        "strokes": [{"color": [0.207843, 0.207843, 0.207843], "width": 0.03}],
+        "shadows": [{"color": [0.423529, 0.423529, 0.423529], "alpha": 0.4, "diffuse": 0.004711, "distance": 3.250336, "angle": -40.457603}]
+      },
+      "animation_ref": null
+    },
+    "cinematic_phrase": {
+      "source_project": "拆解工程30",
+      "use_when": "A short person-story phrase, question, or emotional turn.",
+      "material_type": "text",
+      "style": {"fill": [1.0, 1.0, 1.0], "size": 25, "font_file": "SourceHanSerifCN-Heavy.otf", "font_id": "6807742980271641102", "effect_style_id": "7160601239800040712", "use_letter_color": true},
+      "accent_variant": {"fill": [0.996078, 0.541176, 0.501961]},
+      "animation_ref_options": ["#/motion_catalog/fade_in", "#/motion_catalog/shrink", "#/motion_catalog/typewriter_i"]
+    },
+    "kinetic_keyword_hit": {
+      "source_project": "拆解工程20",
+      "use_when": "A viral result, amount, identity, or short conclusion.",
+      "material_type": "text",
+      "base_style": {"fill": [1.0, 1.0, 1.0], "size": 43.210709, "font_file": "FZCuJinLJW.ttf", "font_id": "7086699209738424840", "use_letter_color": true},
+      "accent_style": {"fill": [1.0, 0.956863, 0.537255], "size": 78.926659, "font_file": "FZCuJinLJW.ttf", "font_id": "7086699209738424840", "use_letter_color": true},
+      "shared_shadow": {"color": [0.0, 0.0, 0.0], "alpha": 0.307412, "diffuse": 0.015279, "distance": 5.0, "angle": -45.0},
+      "animation_ref_options": ["#/motion_catalog/zoom_in", "#/motion_catalog/spring", "#/motion_catalog/slide_up"]
+    },
+    "data_question_card": {
+      "source_project": "拆解工程37",
+      "use_when": "Question, date, amount, or section label in a data-led explainer.",
+      "material_type": "text",
+      "style": {"fill": [1.0, 1.0, 1.0], "size": 27, "italic": true, "font_file": "特黑体-思源黑体1号.otf", "font_id": "6740439840254333443", "use_letter_color": true},
+      "accent": {"fill": [1.0, 0.537255, 0.12549]},
+      "shadow": {"color": [0.0, 0.0, 0.0], "alpha": 0.9, "diffuse": 0.025, "distance": 5.0, "angle": -45.0},
+      "background": {"alpha": 0.224547, "color": "#ff8d00", "style": 1, "vertical_offset": -0.170153},
+      "animation_ref_options": ["#/motion_catalog/slow_in_right", "#/motion_catalog/blur_right_ii"]
+    },
+    "pastel_bounce_keyword": {
+      "source_project": "拆解工程18",
+      "use_when": "Health, beauty, lifestyle, or playful short conclusion.",
+      "material_type": "text",
+      "style": {"fill": [0.890196, 0.94902, 0.811765], "size": 66, "bold": true, "font_file": "圆体-汉仪中圆简.ttf", "font_id": "6740436583247254029", "use_letter_color": true},
+      "stroke": {"color": [0.101961, 0.309804, 0.196078], "width": 0.016},
+      "animation_ref": "#/motion_catalog/spring"
+    },
+    "xiaohongshu_red_hit": {
+      "source_project": "拆解工程39",
+      "use_when": "A short self-growth or lifestyle command/conclusion.",
+      "material_type": "subtitle",
+      "style": {"fill": [0.780392, 0.07451, 0.011765], "size": 55.071945, "font_file": "HelloFont ID YouQiTi.ttf", "font_id": "7035906361040835079", "use_letter_color": true},
+      "in_animation_options": ["#/motion_catalog/jump_in", "#/motion_catalog/suck_in"],
+      "out_animation": "#/motion_catalog/pop_out",
+      "optional_effect": "#/effect_catalog/bloom"
+    },
+    "giant_concept_word": {
+      "source_project": "拆解工程27",
+      "use_when": "A single concept or chapter word in a montage.",
+      "material_type": "text",
+      "style": {"fill": [1.0, 1.0, 1.0], "size": 143.596115, "font_file": "后现代体.otf", "font_id": "6740435494053614093", "use_letter_color": true},
+      "line_spacing": 0.0,
+      "animation_ref_options": ["#/motion_catalog/suck_in", "#/motion_catalog/fade_out"],
+      "limit": "Use one word per chapter peak, not as continuous captions."
+    },
+    "tutorial_annotation": {
+      "source_project": "拆解工程4",
+      "use_when": "Internal editing breakdown only.",
+      "material_type": "text",
+      "style": {"fill": [1.0, 1.0, 1.0], "size": 13, "font_file": "zh-hans.ttf", "effect_style_id": "7272741033979546943"},
+      "effect_ref": "#/effect_catalog/tutorial_label_effect",
+      "export_default": false
+    }
+  },
+  "picture_coordination_rules": [
+    "Analyze a representative frame before positioning text. Positive y is higher in this Jianying draft convention, but exact safe coordinates vary by aspect ratio and crop.",
+    "Keep continuous subtitles away from eyes, mouth, and active hand gestures.",
+    "Place independent keyword layers in the blank field opposite the subject whenever possible.",
+    "Use stroke, shadow, or a deliberate panel when background complexity changes during the text duration.",
+    "When a camera push or crop changes the blank field, split the text segment or keyframe its transform instead of accepting a collision.",
+    "Use foreground occlusion or masks only when the source composition supports stable separation; otherwise keep text entirely foreground or background.",
+    "Convert layouts semantically between horizontal and vertical canvases; do not scale absolute coordinates mechanically."
+  ],
+  "rhythm_rules": [
+    "Use the first three seconds for one hook system: question, contradiction, proof, or visual mystery.",
+    "Keep base subtitles stable between designed hits.",
+    "Allow roughly 0.25-0.5 seconds for a strong text entrance, then hold long enough to read.",
+    "Do not place strong animations back to back without a visual recovery beat unless deliberately building a montage peak.",
+    "Use one-phrase-per-beat for kinetic families and complete clauses for documentary families.",
+    "End with one of four modes: CTA, summary, reflective quote, or visual hold. Do not add a CTA when the script has none."
+  ],
+  "compound_component_catalog": [
+    "person_or_authority_card",
+    "large_number_and_unit_card",
+    "phone_or_social_ui",
+    "left_right_comparison",
+    "numbered_method_list",
+    "timeline_or_growth_sequence",
+    "comment_or_post_capture",
+    "news_or_source_strip",
+    "vlog_date_location_weather",
+    "quote_card",
+    "chapter_transition",
+    "before_after_card",
+    "mask_or_foreground_transition"
+  ],
+  "exclusion_filters": {
+    "instructional_text_patterns": ["仅供学习使用", "仅供个人学习使用", "替换素材", "字体：", "音效：", "画面效果", "视频原创", "剪映制作", "工程内内容均可修改"],
+    "branding_patterns": ["一创有料", "视频拆解主理人", "一创让剪辑就是如此简单"],
+    "exclude_by_default": ["watermark", "author_signature", "source_script_wording", "temporary_placeholder", "broken_local_path", "coordinate_valid_only_for_original_frame"],
+    "rule": "Keep reusable structure and numeric style grammar; discard source authorship, original wording, and tutorial-only layers."
+  },
+  "implementation_rules": [
+    "Treat every blueprint as a pattern, not a draft-ready fragment.",
+    "Resolve fonts locally and preserve font personality when substituting.",
+    "Generate fresh runtime IDs for every material, segment, effect, animation pack, keyframe, track, and subdraft reference.",
+    "For text effects, keep content.styles[*].effectStyle.id aligned with a matching materials.effects item and attach it through extra_material_refs.",
+    "For animation packs, copy resource metadata only after the local cache path resolves.",
+    "For audio, reuse an existing intentional local asset or request/generate a licensed replacement; do not depend on a missing source path.",
+    "Validate main and subdraft material references, then preview representative frames at the hook, first strong hit, data section, and ending."
+  ]
+}

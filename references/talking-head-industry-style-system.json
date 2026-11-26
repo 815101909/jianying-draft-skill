@@ -1,0 +1,441 @@
+{
+  "schema_version": 1,
+  "profile": "jianying-talking-head-industry-style-system",
+  "source_audit": {
+    "root": "C:/drafts/talking-head-library",
+    "top_level_projects": 73,
+    "drafts_including_subdrafts": 150,
+    "text_segments": 2712,
+    "style_clusters": 1395,
+    "parse_errors": 0,
+    "distillation_rule": "Preserve recurring visual grammar and exact numeric anchors; do not copy example wording or runtime material IDs."
+  },
+  "usage_rules": [
+    "Choose an industry_profile first, then choose role_templates by the sentence's semantic role.",
+    "Use one base subtitle identity across a video and reserve large text for hooks, conflict, proof, section changes, and CTA.",
+    "Serialize role_templates[*].content as a JSON string when writing materials.texts.",
+    "Replace all range placeholders and generate fresh runtime IDs for materials, animation packs, segments, tracks, and keyframes.",
+    "Treat font names as priorities. Fall back to a locally available Jianying or system Chinese font without changing hierarchy.",
+    "Attach a native animation only after its cache path resolves locally; otherwise omit it or use portable alpha/scale common_keyframes.",
+    "Positive clip.transform.y is higher on screen. Check the speaker's face and use the blank side or upper field before choosing a position.",
+    "Do not apply every role in every video. Match the script's actual hook, conflict, method, proof, result, and CTA beats."
+  ],
+  "palette": {
+    "white": [1.0, 1.0, 1.0],
+    "black": [0.0, 0.0, 0.0],
+    "pale_yellow": [1.0, 0.960784, 0.537255],
+    "warm_yellow": [1.0, 0.74902, 0.090196],
+    "gold_yellow": [1.0, 0.870588, 0.0],
+    "deep_red": [0.717647, 0.109804, 0.109804],
+    "pure_red": [1.0, 0.0, 0.0],
+    "coral_red": [0.996078, 0.321569, 0.321569],
+    "warm_cream": [0.913725, 0.843137, 0.643137],
+    "soft_cream": [0.976471, 0.952941, 0.768627],
+    "soft_pink": [1.0, 0.666667, 0.756863],
+    "electric_blue": [0.015686, 0.482353, 1.0]
+  },
+  "shared": {
+    "font": {"path": "<RESOLVED_LOCAL_FONT_PATH>", "id": "<RESOLVED_FONT_ID_OR_EMPTY>"},
+    "strong_shadow": {
+      "diffuse": 0.02500000037252903,
+      "alpha": 0.899999976158142,
+      "distance": 4.999999523162842,
+      "content": {"solid": {"color": [0.0, 0.0, 0.0]}},
+      "angle": -45.0
+    },
+    "soft_shadow": {
+      "diffuse": 0.02500000037252903,
+      "alpha": 0.699999988079071,
+      "distance": 4.999999523162842,
+      "content": {"solid": {"color": [0.0, 0.0, 0.0]}},
+      "angle": -45.0
+    },
+    "lower_subtitle_positions": [-0.390625, -0.442708, -0.494792, -0.520833],
+    "middle_emphasis_positions": [-0.286458, -0.260417, -0.152986, 0.083385, 0.211306],
+    "upper_hook_positions": [0.419313, 0.477006, 0.575897, 0.614381, 0.650398, 0.833542]
+  },
+  "animation_catalog": {
+    "fade_in": {"name": "渐显", "id": "1644304", "type": "in"},
+    "opening": {"name": "开幕", "id": "1644279", "type": "in"},
+    "typewriter_cursor": {"name": "打字光标", "id": "14235878", "type": "in"},
+    "character_reveal": {"name": "逐字显影", "id": "1644339", "type": "in"},
+    "random_rise": {"name": "随机上升", "id": "13720553", "type": "in"},
+    "mild_zoom": {"name": "轻微放大", "id": "1644262", "type": "in"},
+    "zoom_in": {"name": "放大", "id": "1644264", "type": "in"},
+    "shrink": {"name": "缩小", "id": "1644263", "type": "in"},
+    "roll_in": {"name": "滚入", "id": "1644320", "type": "in"},
+    "spread": {"name": "晕开", "id": "1714696", "type": "in"},
+    "snow_blur": {"name": "雪光模糊", "id": "35545508", "type": "in"},
+    "ice_snow_float": {"name": "冰雪飘动", "id": "35395178", "type": "in"},
+    "blur_glow": {"name": "模糊发光", "id": "29690460", "type": "in"},
+    "glow_blur": {"name": "发光模糊", "id": "1644342", "type": "in"},
+    "reveal_right": {"name": "向右露出", "id": "5925714", "type": "in"},
+    "reveal_down": {"name": "向下露出", "id": "5925716", "type": "in"},
+    "reveal_up": {"name": "向上露出", "id": "5925717", "type": "in"},
+    "slide_up": {"name": "向上滑动", "id": "1644267", "type": "in"},
+    "slide_down": {"name": "向下滑动", "id": "1644268", "type": "in"},
+    "fold": {"name": "折叠", "id": "3779439", "type": "in"},
+    "shout_wave": {"name": "呐喊声波", "id": "9432429", "type": "in"},
+    "gather": {"name": "收拢", "id": "1644261", "type": "in"},
+    "sunrise": {"name": "日出", "id": "1644269", "type": "in"},
+    "blur_left": {"name": "向左模糊", "id": "3147126", "type": "in"},
+    "slow_in_right": {"name": "向右缓入", "id": "1488722", "type": "in"},
+    "ink_spread": {"name": "水墨晕开", "id": "<RESOLVE_FROM_SOURCE>", "type": "in"},
+    "light_spread": {"name": "流光扩散", "id": "35505526", "type": "in"}
+  },
+  "role_templates": {
+    "base_spoken_subtitle": {
+      "use_when": "Continuous speech, explanation, transition, or setup.",
+      "material_type": "subtitle",
+      "line_spacing": 0.02,
+      "position": {"x": 0.0, "y": -0.390625},
+      "content": {
+        "text": "<TEXT>",
+        "styles": [{
+          "range": [0, "<TEXT_END>"],
+          "fill": {"content": {"solid": {"color": [1.0, 1.0, 1.0]}}},
+          "font": {"$ref": "#/shared/font"},
+          "size": 12,
+          "shadows": [{"$ref": "#/shared/strong_shadow"}]
+        }]
+      },
+      "animation_ref": null
+    },
+    "opening_two_tone_hook": {
+      "use_when": "First 0-3 seconds: audience plus question, contradiction, or promised result.",
+      "material_type": "text",
+      "line_spacing": 0.08,
+      "position": {"x": 0.0, "y": 0.614381},
+      "content": {
+        "text": "<LINE1>\n<LINE2>",
+        "styles": [
+          {
+            "range": [0, "<LINE2_START>"],
+            "fill": {"content": {"solid": {"color": [1.0, 1.0, 1.0]}}},
+            "font": {"$ref": "#/shared/font"},
+            "size": 24,
+            "bold": true,
+            "shadows": [{"$ref": "#/shared/strong_shadow"}]
+          },
+          {
+            "range": ["<LINE2_START>", "<TEXT_END>"],
+            "fill": {"content": {"solid": {"color": [1.0, 0.74902, 0.090196]}}},
+            "font": {"$ref": "#/shared/font"},
+            "size": 32,
+            "bold": true,
+            "useLetterColor": true,
+            "shadows": [{"$ref": "#/shared/strong_shadow"}]
+          }
+        ]
+      },
+      "animation_ref_options": ["#/animation_catalog/typewriter_cursor", "#/animation_catalog/opening", "#/animation_catalog/roll_in"]
+    },
+    "audience_identity_tag": {
+      "use_when": "Name a profession, parent group, student group, gender identity, customer type, or role.",
+      "material_type": "text",
+      "position": {"x": 0.0, "y": 0.419313},
+      "content": {
+        "text": "<TEXT>",
+        "styles": [{
+          "range": [0, "<TEXT_END>"],
+          "fill": {"content": {"solid": {"color": [1.0, 0.960784, 0.537255]}}},
+          "font": {"$ref": "#/shared/font"},
+          "size": 24,
+          "bold": true,
+          "useLetterColor": true,
+          "shadows": [{"$ref": "#/shared/soft_shadow"}]
+        }]
+      },
+      "animation_ref_options": ["#/animation_catalog/typewriter_cursor", "#/animation_catalog/reveal_right"]
+    },
+    "pain_warning_hit": {
+      "use_when": "Risk, mistake, loss, prohibition, conflict, or misconception.",
+      "material_type": "text",
+      "position": {"x": 0.0, "y": 0.477006},
+      "content": {
+        "text": "<TEXT>",
+        "styles": [{
+          "range": [0, "<TEXT_END>"],
+          "fill": {"content": {"solid": {"color": [0.717647, 0.109804, 0.109804]}}},
+          "font": {"$ref": "#/shared/font"},
+          "size": 36,
+          "bold": true,
+          "useLetterColor": true,
+          "shadows": [{"$ref": "#/shared/strong_shadow"}]
+        }]
+      },
+      "animation_ref_options": ["#/animation_catalog/shrink", "#/animation_catalog/glow_blur", "#/animation_catalog/shout_wave"]
+    },
+    "proof_number_hit": {
+      "use_when": "Price, percentage, age, count, ranking, duration, income, or result proof.",
+      "material_type": "text",
+      "position": {"x": 0.0, "y": 0.211306},
+      "content": {
+        "text": "<NUMBER><UNIT_OR_RESULT>",
+        "styles": [
+          {
+            "range": [0, "<NUMBER_END>"],
+            "fill": {"content": {"solid": {"color": [1.0, 0.74902, 0.090196]}}},
+            "font": {"$ref": "#/shared/font"},
+            "size": 42,
+            "bold": true,
+            "useLetterColor": true,
+            "shadows": [{"$ref": "#/shared/strong_shadow"}]
+          },
+          {
+            "range": ["<NUMBER_END>", "<TEXT_END>"],
+            "fill": {"content": {"solid": {"color": [1.0, 1.0, 1.0]}}},
+            "font": {"$ref": "#/shared/font"},
+            "size": 24,
+            "bold": true,
+            "shadows": [{"$ref": "#/shared/strong_shadow"}]
+          }
+        ]
+      },
+      "animation_ref_options": ["#/animation_catalog/roll_in", "#/animation_catalog/zoom_in", "#/animation_catalog/shout_wave"]
+    },
+    "soft_emotional_quote": {
+      "use_when": "Emotional insight, healing statement, relationship conclusion, reading quote, or reflective transition.",
+      "material_type": "text",
+      "position": {"x": 0.0, "y": -0.152986},
+      "content": {
+        "text": "<TEXT>",
+        "styles": [{
+          "range": [0, "<TEXT_END>"],
+          "fill": {"content": {"solid": {"color": [0.913725, 0.843137, 0.643137]}}},
+          "font": {"$ref": "#/shared/font"},
+          "size": 18,
+          "useLetterColor": true,
+          "shadows": [{"$ref": "#/shared/soft_shadow"}]
+        }]
+      },
+      "animation_ref_options": ["#/animation_catalog/fade_in", "#/animation_catalog/character_reveal", "#/animation_catalog/random_rise"]
+    },
+    "method_step_label": {
+      "use_when": "Numbered method, checklist, comparison dimension, process, or service module.",
+      "material_type": "text",
+      "position": {"x": "<ROW_X>", "y": "<ROW_Y>"},
+      "content": {
+        "text": "<INDEX>. <TEXT>",
+        "styles": [{
+          "range": [0, "<TEXT_END>"],
+          "fill": {"content": {"solid": {"color": [1.0, 0.960784, 0.537255]}}},
+          "font": {"$ref": "#/shared/font"},
+          "size": 18,
+          "bold": true,
+          "useLetterColor": true,
+          "shadows": [{"$ref": "#/shared/soft_shadow"}]
+        }]
+      },
+      "animation_ref_options": ["#/animation_catalog/reveal_right", "#/animation_catalog/slide_up", "#/animation_catalog/roll_in"]
+    },
+    "editorial_keyword": {
+      "use_when": "Premium, professional, literary, home-aesthetic, legal, or financial concept emphasis without alarm.",
+      "material_type": "text",
+      "position": {"x": 0.0, "y": -0.260417},
+      "content": {
+        "text": "<TEXT>",
+        "styles": [{
+          "range": [0, "<TEXT_END>"],
+          "fill": {"content": {"solid": {"color": [0.976471, 0.952941, 0.768627]}}},
+          "font": {"$ref": "#/shared/font"},
+          "size": 24,
+          "bold": true,
+          "useLetterColor": true,
+          "shadows": [{"$ref": "#/shared/soft_shadow"}]
+        }]
+      },
+      "animation_ref_options": ["#/animation_catalog/fade_in", "#/animation_catalog/spread", "#/animation_catalog/mild_zoom"]
+    },
+    "cta_action": {
+      "use_when": "Consult, comment, follow, save, receive, register, or visit profile.",
+      "material_type": "text",
+      "position": {"x": 0.0, "y": -0.286458},
+      "background_alpha": 0.55,
+      "background_color": "#000000",
+      "background_round_radius": 0.1,
+      "background_style": 1,
+      "content": {
+        "text": "<LEAD><ACTION>",
+        "styles": [
+          {
+            "range": [0, "<ACTION_START>"],
+            "fill": {"content": {"solid": {"color": [1.0, 1.0, 1.0]}}},
+            "font": {"$ref": "#/shared/font"},
+            "size": 16,
+            "bold": true
+          },
+          {
+            "range": ["<ACTION_START>", "<TEXT_END>"],
+            "fill": {"content": {"solid": {"color": [1.0, 0.74902, 0.090196]}}},
+            "font": {"$ref": "#/shared/font"},
+            "size": 24,
+            "bold": true,
+            "useLetterColor": true
+          }
+        ]
+      },
+      "animation_ref_options": ["#/animation_catalog/roll_in", "#/animation_catalog/reveal_up"]
+    }
+  },
+  "tutorial_distillation": {
+    "sources": [
+      "1-1-文字排版原则",
+      "1-2-文字排版形式参考",
+      "1-3-文字排版",
+      "2-1-文字动画和音效常用搭配",
+      "2-2-音效分类",
+      "3-1-封面排版",
+      "3-2-封面设计"
+    ],
+    "hierarchy": {
+      "body_or_annotation_size": "8-15",
+      "keyword_or_step_size": "18-24",
+      "hook_result_or_number_size": "32-80",
+      "rule": "Create contrast with no more than three simultaneous size levels. Increase only the semantic payload, not filler words."
+    },
+    "layout_forms": [
+      "Two-line centered hook with the result or conflict on line two.",
+      "Stable lower-third spoken subtitle plus a separate upper keyword layer.",
+      "Left-right paired comparison labels.",
+      "Three-row numbered method list with aligned x and stepped y anchors.",
+      "Oversized number plus smaller unit or conclusion.",
+      "Short side label for identity, profession, or chapter change.",
+      "Persistent top topic header only when the video is comparison-led.",
+      "Vertical side teaser only for deliberate serial-content endings."
+    ],
+    "motion_rules": [
+      "Animate semantic hits, not every spoken subtitle.",
+      "Use fade, character reveal, or random rise for reflective and emotional content.",
+      "Use zoom, shrink, roll, shout wave, or glow blur for conflict, data, and sales energy.",
+      "Use reveal and slide motions for lists, steps, chapters, and professional explanations.",
+      "Keep a strong entrance to roughly 0.25-0.5 seconds; let the text remain static long enough to read.",
+      "Do not pair an unresolved native animation with every subtitle; one missing cache path can break the whole repeated style."
+    ],
+    "cover_rules": [
+      "Use one audience/topic line and one conflict/result line.",
+      "Make the second line the dominant typographic mass.",
+      "Keep numbers, price gaps, warnings, and outcome words in the accent color.",
+      "Avoid copying timeline captions onto the cover; rewrite them as a compact promise or contradiction."
+    ]
+  },
+  "industry_profiles": {
+    "commercial_creator_startup": {
+      "source_projects": ["1-知识付费 (1)", "8-创业IP", "9-商业导师", "30-商业认知", "31-知识付费", "36-商业认知", "39-知识付费", "39-知识付费(1)", "41-创业分享", "45-知识付费", "64-商业认知"],
+      "use_when": "Knowledge commerce, founder IP, entrepreneurship, business cognition, methods, monetization, and opportunity warnings.",
+      "tone": "High information density, decisive, result-led, sales-capable.",
+      "font_priority": ["得意黑.ttf", "思源宋体-Bold.otf", "FZCuJinLJW.ttf", "特黑体-思源黑体1号.otf", "Aa研宋.ttf"],
+      "palette_priority": ["white", "pale_yellow", "deep_red", "warm_yellow", "lime_or_orange_from_specialized_registry"],
+      "base": {"size": 12, "y": -0.390625},
+      "roles": ["opening_two_tone_hook", "base_spoken_subtitle", "pain_warning_hit", "method_step_label", "proof_number_hit", "cta_action"],
+      "animation_priority": ["fade_in", "blur_glow", "roll_in", "typewriter_cursor", "shrink", "reveal_down", "ice_snow_float", "reveal_right"],
+      "specialized_registry": "knowledge-payment-subtitle-presets.json"
+    },
+    "career_workplace": {
+      "source_projects": ["3-职场规划", "5-职场", "32-职场规划", "51-职场", "60-职场规划"],
+      "use_when": "Career planning, workplace advice, promotion, job choices, salary, and professional growth.",
+      "tone": "Direct and practical with moderate conflict; less sales-heavy than entrepreneurship.",
+      "font_priority": ["DouyinSansBold.otf", "知新体.ttf", "得意黑.ttf", "思源宋体-Bold.otf", "SourceHanSerifCN-Heavy.otf"],
+      "palette_priority": ["white", "pale_yellow", "deep_red", "warm_yellow", "soft_cream"],
+      "base": {"size": 12, "y": -0.520115},
+      "roles": ["opening_two_tone_hook", "base_spoken_subtitle", "pain_warning_hit", "method_step_label", "proof_number_hit"],
+      "animation_priority": ["spread", "fade_in", "slow_in_right", "shrink", "typewriter_cursor", "zoom_in"]
+    },
+    "women_emotion_psychology_healing": {
+      "source_projects": ["2-女性成长", "10-女性情感", "13-心理", "15-女性成长", "16-疗愈", "18-情感", "55-女性成长", "59-女性成长", "63-情感"],
+      "use_when": "Women's growth, relationships, psychology, self-worth, healing, and emotional stories.",
+      "tone": "Warm, intimate, reflective; emphasize recognition before advice.",
+      "font_priority": ["方正超粗黑繁体.ttf", "细体-思源黑体7号.otf", "喜鹊古字典体(字节试用版).ttf", "思源宋体-Bold.otf", "DouyinSansBold.otf"],
+      "palette_priority": ["white", "pale_yellow", "gold_yellow", "warm_cream", "soft_pink", "deep_red_for_true_conflict_only"],
+      "base": {"size": 12, "y": -0.390625},
+      "roles": ["opening_two_tone_hook", "base_spoken_subtitle", "audience_identity_tag", "soft_emotional_quote", "editorial_keyword"],
+      "animation_priority": ["fade_in", "random_rise", "opening", "character_reveal", "mild_zoom"],
+      "avoid": "Do not use pure-red oversized warnings unless the script contains genuine danger or abuse."
+    },
+    "law_legal_services": {
+      "source_projects": ["6-法律行业", "25-法律", "47-律师", "50-法律", "56-律师"],
+      "use_when": "Lawyer education, case facts, legal risk, procedure, compensation, and evidence.",
+      "tone": "Authoritative, restrained, legible, evidence-led.",
+      "font_priority": ["得意黑.ttf", "DouyinSansBold.otf", "SourceHanSerifCN-Heavy.otf", "星汉宋.ttf", "特黑体-思源黑体1号.otf"],
+      "palette_priority": ["white", "warm_yellow", "deep_red", "coral_red"],
+      "base": {"size": 12, "y": -0.494792},
+      "roles": ["opening_two_tone_hook", "base_spoken_subtitle", "pain_warning_hit", "proof_number_hit", "method_step_label"],
+      "animation_priority": ["shrink", "fade_in", "blur_left", "snow_blur", "typewriter_cursor", "glow_blur"],
+      "avoid": "Keep decorative motion below the authority of dates, amounts, clauses, and procedural steps."
+    },
+    "finance_tax_loan": {
+      "source_projects": ["7-金融知识", "21-贷款", "23-财税", "37-银行贷款", "43-财经金融", "48-金融", "49-财经 (1)", "53-金融"],
+      "use_when": "Finance, lending, banking, tax, markets, money risk, return, and policy explanation.",
+      "tone": "Fast, numerical, risk-aware, professional.",
+      "font_priority": ["得意黑.ttf", "造字工房俊雅体.ttf", "SourceHanSerifCN-Heavy.otf", "FZCuJinLJW.ttf", "特黑体-思源黑体1号.otf"],
+      "palette_priority": ["white", "warm_yellow", "pale_yellow", "deep_red", "gold_yellow", "pure_red_for_loss_or_warning"],
+      "base": {"size": 12, "y": -0.390625},
+      "roles": ["opening_two_tone_hook", "base_spoken_subtitle", "proof_number_hit", "pain_warning_hit", "method_step_label"],
+      "animation_priority": ["roll_in", "zoom_in", "blur_left", "fade_in", "shout_wave", "glow_blur", "slide_down"]
+    },
+    "education_parenting_study_abroad": {
+      "source_projects": ["20-家庭教育", "22-留学", "29-升学规划", "34-家庭教育", "38-家庭教育", "52-家庭教育", "54-家庭教育", "57-留学", "61-升学规划", "62-育儿"],
+      "use_when": "Parenting, family education, school choice, exam planning, overseas study, and child development.",
+      "tone": "Concern-led but supportive; identify parent/student first, then provide clear steps.",
+      "font_priority": ["得意黑.ttf", "造字工房俊雅体.ttf", "知新体.ttf", "思源宋体-Bold.otf"],
+      "palette_priority": ["white", "deep_red", "warm_yellow", "pale_yellow", "warm_cream", "electric_blue_for_information_labels"],
+      "base": {"size": 12, "y": -0.390625},
+      "roles": ["opening_two_tone_hook", "audience_identity_tag", "base_spoken_subtitle", "pain_warning_hit", "method_step_label", "proof_number_hit"],
+      "animation_priority": ["zoom_in", "spread", "fade_in", "shrink", "snow_blur", "slide_up", "opening", "roll_in"]
+    },
+    "wellness_beauty_fitness": {
+      "source_projects": ["4-中医养生", "12-美业", "24-美业", "26-养生", "26-养生 (1)", "27-瑜伽健身", "40-养生"],
+      "use_when": "Traditional wellness, health habits, beauty services, skin/body care, yoga, and fitness.",
+      "tone": "Calm expertise with visible before/after or action cues; traditional content may use editorial rhythm.",
+      "font_priority": ["造字工房俊雅体.ttf", "喜鹊古字典体(字节试用版).ttf", "SourceHanSerifCN-Heavy.otf", "FZCuJinLJW.ttf", "DouyinSansBold.otf"],
+      "palette_priority": ["white", "pale_yellow", "warm_yellow", "warm_cream", "deep_red"],
+      "base": {"size": 12, "y": -0.390625},
+      "roles": ["opening_two_tone_hook", "base_spoken_subtitle", "editorial_keyword", "method_step_label", "proof_number_hit", "cta_action"],
+      "animation_priority": ["shrink", "gather", "snow_blur", "fade_in", "sunrise", "opening", "typewriter_cursor", "ice_snow_float"],
+      "traditional_variant": "Prefer ink_spread, fade, cream, and serif-like fonts for Chinese-medicine or classical-health scripts."
+    },
+    "automotive_sales": {
+      "source_projects": ["11-汽车行业", "17-二手车", "44-汽车行业", "58-汽车销售"],
+      "use_when": "New cars, used cars, vehicle sales, configuration, price, ownership cost, and purchase advice.",
+      "tone": "Energetic, product-led, numerical, price-sensitive.",
+      "font_priority": ["FZZJ-JHTJW.TTF", "造字工房俊雅体.ttf", "新青年体.ttf", "SourceHanSerifCN-Heavy.otf", "得意黑.ttf"],
+      "palette_priority": ["white", "gold_yellow", "pale_yellow", "warm_yellow", "coral_red"],
+      "base": {"size": 12, "y": -0.390625},
+      "roles": ["opening_two_tone_hook", "base_spoken_subtitle", "proof_number_hit", "method_step_label", "pain_warning_hit", "cta_action"],
+      "animation_priority": ["shrink", "fade_in", "random_rise", "zoom_in", "roll_in", "typewriter_cursor", "mild_zoom", "shout_wave"]
+    },
+    "property_home_design": {
+      "source_projects": ["19-房产中介", "28-家居", "33-全屋定制", "35-房产经纪", "46-家居美学"],
+      "use_when": "Property brokerage, buying/selling, interiors, whole-home customization, and home aesthetics.",
+      "tone": "Trustworthy and spatial; sales variants use proof, design variants use editorial restraint.",
+      "font_priority": ["得意黑.ttf", "DouyinSansBold.otf", "造字工房俊雅体.ttf", "SourceHanSerifCN-Heavy.otf", "FZCuJinLJW.ttf"],
+      "palette_priority": ["white", "warm_yellow", "deep_red", "pale_yellow", "gold_yellow", "soft_cream"],
+      "base": {"size": 12, "y": -0.390625},
+      "roles": ["opening_two_tone_hook", "base_spoken_subtitle", "editorial_keyword", "proof_number_hit", "method_step_label", "cta_action"],
+      "animation_priority": ["mild_zoom", "fade_in", "roll_in", "ice_snow_float", "blur_left", "light_spread", "reveal_up"],
+      "variant_rule": "Use proof_number_hit for brokerage and editorial_keyword for design/aesthetic content."
+    },
+    "reading_literary": {
+      "source_projects": ["14-读书"],
+      "use_when": "Book interpretation, quotations, literary insights, and reflective knowledge sharing.",
+      "tone": "Quiet, literary, spacious.",
+      "font_priority": ["造字工房俊雅体.ttf", "思源宋体-Bold.otf"],
+      "palette_priority": ["white", "pale_yellow", "warm_cream"],
+      "base": {"size": 12, "y": -0.390625},
+      "roles": ["base_spoken_subtitle", "soft_emotional_quote", "editorial_keyword"],
+      "animation_priority": ["fade_in", "random_rise", "opening"],
+      "avoid": "Avoid sales-style red warnings and shout-wave motion."
+    },
+    "social_commentary": {
+      "source_projects": ["42-社会评论"],
+      "use_when": "Social commentary, public events, opinion, contradiction, and consequential statistics.",
+      "tone": "Sharp, news-like, high contrast, argument-led.",
+      "font_priority": ["造字工房俊雅体.ttf", "得意黑.ttf", "尔雅新大黑.ttf"],
+      "palette_priority": ["white", "pale_yellow", "pure_red"],
+      "base": {"size": 12, "y": -0.390625},
+      "roles": ["opening_two_tone_hook", "base_spoken_subtitle", "pain_warning_hit", "proof_number_hit"],
+      "animation_priority": ["fold", "shrink", "glow_blur", "slide_up", "ice_snow_float"],
+      "avoid": "Do not turn every opinion sentence red; reserve red for the central contradiction or consequence."
+    }
+  }
+}

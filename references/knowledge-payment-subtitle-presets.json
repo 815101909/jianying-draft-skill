@@ -1,0 +1,1216 @@
+{
+  "schema_version": 1,
+  "profile": "commercial-talking-head-subtitle-library",
+  "subprofiles": [
+    "lime-commercial-founder-ip",
+    "orange-high-contrast-editing-education",
+    "red-yellow-startup-opportunity-warning"
+  ],
+  "source": {
+    "draft_names": [
+      "1-知识付费 (1)",
+      "31-知识付费",
+      "41-创业分享"
+    ],
+    "canvas": {
+      "width": 1080,
+      "height": 1920
+    },
+    "duration_us": 29466666,
+    "notes": [
+      "Values were reverse-engineered from an existing JianyingPro draft.",
+      "The registry is a reusable blueprint. It is not a complete draft fragment."
+    ]
+  },
+  "usage_rules": [
+    "Select a preset by use_when and semantic role, not by example text alone.",
+    "Replace <TEXT>, <FONT_PATH>, range placeholders, position variants, and animation resource paths.",
+    "Resolve every $ref against this JSON document before writing draft_content.json.",
+    "Serialize material.content as a JSON string in materials.texts; it is an object here only for readability.",
+    "Generate a fresh runtime id for every material, animation pack, and segment.",
+    "Keep times in microseconds and validate material_id plus extra_material_refs.",
+    "Do not add strokes or text effects: this profile uses fill, shadow, background, scale, position, and animation.",
+    "Only attach native animations after resolving a valid local Jianying cache path. Omit unresolved animations."
+  ],
+  "composition_engine": {
+    "mode": "automatic_by_default",
+    "intent": "Turn a script into a restrained multi-track subtitle composition without waiting for the user to name individual presets.",
+    "activate_when": [
+      "The user asks to style, package, enhance, or add subtitles to a knowledge-payment, founder-IP, startup, business, or editing-education talking-head draft.",
+      "The user asks to apply this skill or a distilled template to a draft.",
+      "The user asks for editing and the draft contains speech-led text or transcribed captions."
+    ],
+    "opt_out_when": [
+      "The user explicitly requests plain, minimal, single-style, or accessibility-only captions.",
+      "The user explicitly locks a supplied design and forbids additional emphasis layers."
+    ],
+    "workflow": [
+      "Read the complete spoken text in timeline order and divide it into semantic beats before selecting visual styles.",
+      "Choose one subprofile from profile_selection and keep its base subtitle preset as the continuous visual identity.",
+      "Mark each beat as hook, audience, authority, pain, pain_cluster, turn, solution, method, comparison, proof, identity, result, CTA, or transition.",
+      "Select the strongest matching combination_recipe for each passage; do not choose styles only because example wording looks similar.",
+      "Keep ordinary explanation on the base subtitle track. Replace or temporarily suppress duplicate base text when a large overlay carries the same words.",
+      "Resolve local fonts, animation paths, text shapes, and optional sound assets. Fall back to portable keyframes or static emphasis when a native resource is unresolved.",
+      "Run density, collision, readability, and reference-integrity checks before saving the draft."
+    ],
+    "profile_selection": {
+      "lime-commercial-founder-ip": {
+        "signals": ["创始人IP", "实体老板", "商业方法", "AI提效", "企业案例", "方法论", "获客", "老板出镜"],
+        "base_preset": "spoken_subtitle",
+        "accent_family": ["hook_two_tone_title", "audience_tag", "authority_name", "pain_conflict_large", "pain_barrage", "solution_keyword", "method_step", "proof_number", "cta_partial_highlight"]
+      },
+      "orange-high-contrast-editing-education": {
+        "signals": ["剪辑教学", "价格对比", "能力差距", "案例拆解", "爆款", "关键信息", "音效", "下期揭秘"],
+        "base_preset": "plain_spoken_subtitle_shadow",
+        "accent_family": ["persistent_topic_header_orange", "section_label_fold", "animated_sentence_emphasis_orange", "paired_micro_bubble_tags", "oversized_keyword_hit_yellow", "next_episode_vertical_teaser"]
+      },
+      "red-yellow-startup-opportunity-warning": {
+        "signals": ["创业机会", "风险警示", "骗局", "AI赛道", "赚钱角色", "行业加AI", "变现", "咨询落地"],
+        "base_preset": "startup_plain_narrative_subtitle",
+        "accent_family": ["startup_warning_red_oversized", "startup_opportunity_label_pale_yellow", "startup_combination_formula_card", "startup_result_hit_coral", "startup_identity_ribbon_red", "startup_chat_bubble_cta"]
+      }
+    },
+    "combination_recipes": [
+      {
+        "key": "hook_identity_open",
+        "use_when": "The opening contains a topic promise plus a clearly named audience or identity.",
+        "roles": ["hook", "audience"],
+        "preset_sequence": ["hook_two_tone_title", "audience_tag"],
+        "timing": "Place the main hook in the first 0.2 to 0.8 seconds; introduce the audience tag within the next 0.5 to 1.5 seconds and keep both readable without covering the face.",
+        "sound_role": "optional_hook_hit"
+      },
+      {
+        "key": "authority_to_conclusion",
+        "use_when": "A named person, company, expert, or case is immediately followed by a takeaway.",
+        "roles": ["authority", "solution"],
+        "preset_sequence": ["authority_name", "solution_keyword"],
+        "timing": "Show the authority label briefly, then replace it with the conclusion instead of stacking both for the full sentence.",
+        "sound_role": "optional_identity_or_keyword_hit"
+      },
+      {
+        "key": "pain_pressure_stack",
+        "use_when": "A passage states one core objection and then lists at least three short costs, failures, or negative consequences.",
+        "roles": ["pain", "pain_cluster"],
+        "preset_sequence": ["pain_conflict_large", "pain_barrage"],
+        "timing": {
+          "core_pain_hold_s": [1.2, 2.5],
+          "barrage_item_count": [3, 4],
+          "barrage_segment_duration_s": [0.9, 1.3],
+          "barrage_stagger_s": [0.15, 0.35],
+          "barrage_loop_animation_duration_s": 1.7,
+          "source_example_positions": [
+            {"x": -0.390776699029126, "y": 0.381991814461119},
+            {"x": 0.359874904155731, "y": 0.180081855388813},
+            {"x": 0.0, "y": 0.668485675306958}
+          ]
+        },
+        "editing_rule": "Use short noun or verb phrases. Allow a small overlap between neighboring barrage items, but never cover the speaker's eyes or the base subtitle.",
+        "sound_role": "optional_barrage_swishes_or_ticks"
+      },
+      {
+        "key": "solution_method_proof",
+        "use_when": "The script turns from a problem to a method, enumerates two or more steps, and provides a number or case result.",
+        "roles": ["turn", "solution", "method", "proof"],
+        "preset_sequence": ["solution_keyword", "method_step", "proof_number"],
+        "timing": "Give the solution its own beat, assemble method items into stable rows, then reserve a separate beat for proof. Do not animate every continuation segment.",
+        "sound_role": "optional_solution_hit_then_light_step_ticks"
+      },
+      {
+        "key": "comparison_teaching",
+        "subprofile": "orange-high-contrast-editing-education",
+        "use_when": "The script compares prices, people, tools, abilities, or two editing approaches.",
+        "roles": ["hook", "comparison", "keyword", "result"],
+        "preset_sequence": ["persistent_topic_header_orange", "section_label_fold", "paired_micro_bubble_tags", "animated_sentence_emphasis_orange", "oversized_keyword_hit_yellow"],
+        "editing_rule": "Keep the topic header persistent but quiet. Use section labels only at object changes, paired bubbles only for true two-item comparisons, and one oversized result at the strongest conclusion.",
+        "sound_role": "optional_section_fold_and_result_hit"
+      },
+      {
+        "key": "warning_opportunity_formula_result",
+        "subprofile": "red-yellow-startup-opportunity-warning",
+        "use_when": "The passage moves from risk or myth to an opportunity category, then explains a combination formula and its outcome.",
+        "roles": ["pain", "solution", "method", "result"],
+        "preset_sequence": ["startup_warning_red_oversized", "startup_opportunity_label_pale_yellow", "startup_combination_formula_card", "startup_result_hit_coral"],
+        "editing_rule": "Use the oversized warning once near the opening. Keep the formula readable for the full spoken phrase and delay the result hit until the outcome is spoken.",
+        "sound_role": "warning_hit_then_formula_reveal_then_result_hit"
+      },
+      {
+        "key": "identity_to_cta",
+        "use_when": "The ending names who the viewer can become and invites consultation, a message, a download, or a next step.",
+        "roles": ["identity", "CTA"],
+        "preset_options": [
+          ["audience_tag", "cta_partial_highlight"],
+          ["startup_identity_ribbon_red", "startup_chat_bubble_cta"]
+        ],
+        "editing_rule": "Choose the option that matches the active subprofile. Do not invent a CTA when the script has none.",
+        "sound_role": "optional_soft_cta_pop"
+      }
+    ],
+    "density_budget": {
+      "per_30_seconds": {
+        "base_subtitle": "continuous except where deliberately replaced by a semantic overlay",
+        "opening_hook": [0, 1],
+        "large_keyword_or_warning": [2, 4],
+        "pain_barrage_group": [0, 1],
+        "method_or_comparison_group": [0, 1],
+        "proof_number": [0, 2],
+        "CTA": [0, 1]
+      },
+      "minimum_gap_between_large_hits_s": 1.2,
+      "max_simultaneous_text_layers": 3,
+      "rule": "Prefer one complete semantic combination over many unrelated animated captions."
+    },
+    "collision_and_readability": [
+      "Reserve one stable lower-third zone for base subtitles.",
+      "Use upper, side, or staggered zones for semantic overlays and keep the speaker's eyes and mouth unobstructed.",
+      "Do not show two large emphasis presets simultaneously unless the recipe explicitly defines a paired layout.",
+      "Keep short impact text to roughly 2 to 8 Chinese characters per line; split longer thoughts into a base caption plus a short keyword.",
+      "Remove sentence-final Chinese periods and commas from display blocks when they do not carry meaning.",
+      "Use no more than three font families in one video: one base family, one display family, and an optional numeric or Latin-heavy family.",
+      "Treat colored timeline clips as editor UI metadata, not rendered text backgrounds."
+    ],
+    "selection_fallbacks": [
+      "If semantic confidence is low, retain the base subtitle and add no large overlay.",
+      "If only one negative consequence exists, use pain_conflict_large without pain_barrage.",
+      "If fewer than two method items exist, use solution_keyword instead of method_step.",
+      "If no verifiable number or case exists, omit proof_number.",
+      "If the user supplies an existing visual system, adapt recipe roles to it instead of replacing it wholesale."
+    ]
+  },
+  "palette": {
+    "white": [1.0, 1.0, 1.0],
+    "lime": [0.7372549176216125, 1.0, 0.0],
+    "deep_red": [0.7176470756530762, 0.10980392247438431, 0.10980392247438431],
+    "black": [0.0, 0.0, 0.0],
+    "orange": [1.0, 0.658823549747467, 0.0],
+    "warm_yellow": [1.0, 0.7490196228027344, 0.09019608050584793],
+    "pure_red": [1.0, 0.0, 0.0],
+    "pale_yellow": [1.0, 0.9607843160629272, 0.5372549295425415],
+    "coral_red": [0.9960784316062927, 0.321568638086319, 0.321568638086319]
+  },
+  "shared": {
+    "font": {
+      "path": "<FONT_PATH>/思源宋体-Bold.otf",
+      "id": ""
+    },
+    "font_hanyi_tianyu": {
+      "path": "<FONT_PATH>/汉仪天宇风行体W.ttf",
+      "id": ""
+    },
+    "font_postmodern": {
+      "path": "<JY_FONT_PATH>/后现代体.otf",
+      "id": "6740435494053614093"
+    },
+    "font_deyi_black": {
+      "path": "<JY_EFFECT_FONT_PATH>/得意黑.ttf",
+      "id": "7399865900821647935"
+    },
+    "font_zaozigongfang_junya": {
+      "path": "<JY_EFFECT_FONT_PATH>/造字工房俊雅体.ttf",
+      "id": "7078971008769593887"
+    },
+    "standard_shadow": {
+      "diffuse": 0.006666666828095913,
+      "alpha": 0.600000023841858,
+      "distance": 7.0,
+      "content": {
+        "solid": {
+          "color": [0.0, 0.0, 0.0]
+        }
+      },
+      "angle": -45.0
+    },
+    "barrage_shadow": {
+      "diffuse": 0.02500000037252903,
+      "alpha": 0.899999976158142,
+      "distance": 4.999999523162842,
+      "content": {
+        "solid": {
+          "color": [0.0, 0.0, 0.0]
+        }
+      },
+      "angle": -45.0
+    },
+    "soft_shadow": {
+      "diffuse": 0.02500000037252903,
+      "alpha": 0.699999988079071,
+      "distance": 4.999999523162842,
+      "content": {
+        "solid": {
+          "color": [0.0, 0.0, 0.0]
+        }
+      },
+      "angle": -45.0
+    },
+    "default_clip": {
+      "scale": {
+        "x": 1.0,
+        "y": 1.0
+      },
+      "transform": {
+        "x": 0.0,
+        "y": -0.520833333333333
+      },
+      "flip": {}
+    }
+  },
+  "animation_catalog": {
+    "right_assemble": {
+      "name": "向右集合",
+      "id": "1661186",
+      "type": "in"
+    },
+    "typing_cursor": {
+      "name": "打字光标",
+      "id": "14235878",
+      "type": "in"
+    },
+    "fade_in": {
+      "name": "渐显",
+      "id": "1644304",
+      "type": "in"
+    },
+    "opening": {
+      "name": "开幕",
+      "id": "1644279",
+      "type": "in"
+    },
+    "shrink_ii": {
+      "name": "缩小 II",
+      "id": "1644341",
+      "type": "in"
+    },
+    "reveal_up": {
+      "name": "向上露出",
+      "id": "5925717",
+      "type": "in"
+    },
+    "reveal_down": {
+      "name": "向下露出",
+      "id": "5925716",
+      "type": "in"
+    },
+    "reveal_left": {
+      "name": "向左露出",
+      "id": "5925715",
+      "type": "in"
+    },
+    "random_rise": {
+      "name": "随机上升",
+      "id": "13720553",
+      "type": "in"
+    },
+    "snow_blur": {
+      "name": "雪光模糊",
+      "id": "35545508",
+      "type": "in"
+    },
+    "laser_engrave": {
+      "name": "激光雕刻",
+      "id": "15261101",
+      "resource_id": "7244102612700631589",
+      "type": "in"
+    },
+    "roll_in": {
+      "name": "滚入",
+      "id": "1644320",
+      "resource_id": "7026674824537707038",
+      "type": "in"
+    },
+    "spread": {
+      "name": "晕开",
+      "id": "1714696",
+      "type": "in"
+    },
+    "shout_wave": {
+      "name": "呐喊声波",
+      "id": "9432429",
+      "type": "in"
+    },
+    "barrage_scroll": {
+      "name": "弹幕滚动",
+      "id": "1644518",
+      "type": "loop"
+    },
+    "blur_glow": {
+      "name": "模糊发光",
+      "id": "29690460",
+      "resource_id": "7301535952101446170",
+      "type": "in"
+    },
+    "shrink": {
+      "name": "缩小",
+      "id": "1644263",
+      "resource_id": "6724921217721045515",
+      "type": "in"
+    },
+    "jump_in": {
+      "name": "跃进",
+      "id": "11996999",
+      "resource_id": "7220685840442200634",
+      "type": "in"
+    },
+    "glow_blur": {
+      "name": "发光模糊",
+      "id": "1696131",
+      "resource_id": "7054482687297327630",
+      "type": "in"
+    },
+    "fold": {
+      "name": "折叠",
+      "id": "3779439",
+      "resource_id": "7125298122011447816",
+      "type": "in"
+    },
+    "mild_zoom": {
+      "name": "轻微放大",
+      "id": "1644262",
+      "resource_id": "6763469998330483213",
+      "type": "in"
+    },
+    "glow_blur_standard": {
+      "name": "发光模糊",
+      "id": "1644342",
+      "resource_id": "7054482687297327630",
+      "type": "in"
+    },
+    "slide_down": {
+      "name": "向下滑动",
+      "id": "1644268",
+      "resource_id": "6724921985282871816",
+      "type": "in"
+    },
+    "new_year_typewriter": {
+      "name": "新年打字机",
+      "id": "21711818",
+      "resource_id": "7272754730684650045",
+      "type": "in"
+    },
+    "ice_snow_float": {
+      "name": "冰雪飘动",
+      "id": "35395178",
+      "resource_id": "7314291622525538843",
+      "type": "in"
+    },
+    "reveal_right": {
+      "name": "向右露出",
+      "id": "5925714",
+      "resource_id": "7163514730525495839",
+      "type": "in"
+    },
+    "star_sparkle": {
+      "name": "星光闪闪",
+      "id": "32665781",
+      "resource_id": "7309036302962266675",
+      "type": "in"
+    }
+  },
+  "text_shape_catalog": {
+    "conversation_77": {
+      "name": "会话77",
+      "effect_id": "720188",
+      "resource_id": "6824371446047838733",
+      "type": "text_shape"
+    },
+    "conversation_78": {
+      "name": "会话78",
+      "effect_id": "720190",
+      "resource_id": "6824371676180910605",
+      "type": "text_shape"
+    },
+    "conversation_76": {
+      "name": "会话76",
+      "effect_id": "720184",
+      "resource_id": "6824371297259098632",
+      "type": "text_shape"
+    }
+  },
+  "presets": [
+    {
+      "key": "hook_two_tone_title",
+      "label": "开场双色主标题",
+      "use_when": "开场0至3秒，直接说明目标人群和主题。",
+      "examples": ["实体工厂老板\n该怎么做短视频"],
+      "material": {
+        "type": "text",
+        "line_spacing": 0.22,
+        "content": {
+          "text": "<TEXT>",
+          "styles": [
+            {
+              "range": ["<LINE1_START>", "<LINE1_END_INCLUDING_BREAK>"],
+              "fill": {"content": {"solid": {"color": [1.0, 1.0, 1.0]}}},
+              "font": {"$ref": "#/shared/font"},
+              "size": 20,
+              "bold": true,
+              "shadows": [{"$ref": "#/shared/standard_shadow"}]
+            },
+            {
+              "range": ["<LINE2_START>", "<TEXT_END>"],
+              "fill": {"content": {"solid": {"color": [0.7372549176216125, 1.0, 0.0]}}},
+              "font": {"$ref": "#/shared/font"},
+              "size": 20,
+              "bold": true,
+              "useLetterColor": true,
+              "shadows": [{"$ref": "#/shared/standard_shadow"}]
+            }
+          ]
+        }
+      },
+      "segment": {
+        "clip": {
+          "scale": {"x": 1.0, "y": 1.0},
+          "transform": {"x": 0.0, "y": -0.408609026830377},
+          "flip": {}
+        }
+      },
+      "animation_ref": null
+    },
+    {
+      "key": "audience_tag",
+      "label": "目标人群标签",
+      "use_when": "开场点名受众、行业、职业或身份。",
+      "examples": ["实体工厂老板"],
+      "material": {
+        "type": "text",
+        "line_spacing": 0.02,
+        "content": {
+          "text": "<TEXT>",
+          "styles": [{
+            "range": [0, "<TEXT_END>"],
+            "fill": {"content": {"solid": {"color": [0.7372549176216125, 1.0, 0.0]}}},
+            "font": {"$ref": "#/shared/font"},
+            "size": 22,
+            "bold": true,
+            "useLetterColor": true,
+            "shadows": [{"$ref": "#/shared/standard_shadow"}]
+          }]
+        }
+      },
+      "segment": {
+        "clip": {
+          "scale": {"x": 1.0, "y": 1.0},
+          "transform": {"x": -0.021, "y": -0.414},
+          "flip": {}
+        }
+      },
+      "animation_ref": "#/animation_catalog/typing_cursor"
+    },
+    {
+      "key": "spoken_subtitle",
+      "label": "常规口播字幕",
+      "use_when": "连续讲话、解释、过渡和补充信息；保持稳定，不抢画面。",
+      "examples": ["目前众多大佬", "那是因为你的方法", "验证方法论"],
+      "material": {
+        "type": "subtitle",
+        "line_spacing": 0.02,
+        "background_alpha": 0.7,
+        "background_color": "#000000",
+        "background_width": 0.0,
+        "background_height": 0.0,
+        "background_style": 1,
+        "content": {
+          "text": "<TEXT>",
+          "styles": [{
+            "range": [0, "<TEXT_END>"],
+            "fill": {"content": {"solid": {"color": [1.0, 1.0, 1.0]}}},
+            "font": {"$ref": "#/shared/font"},
+            "size": 16,
+            "shadows": [{"$ref": "#/shared/standard_shadow"}]
+          }]
+        }
+      },
+      "segment": {
+        "clip": {"$ref": "#/shared/default_clip"}
+      },
+      "animation_ref": null
+    },
+    {
+      "key": "authority_name",
+      "label": "人物姓名与权威背书",
+      "use_when": "出现名人、专家、客户或案例人物时短暂标注姓名。",
+      "examples": ["周鸿祎", "雷军"],
+      "material": {
+        "type": "text",
+        "line_spacing": 0.02,
+        "content": {
+          "text": "<TEXT>",
+          "styles": [{
+            "range": [0, "<TEXT_END>"],
+            "fill": {"content": {"solid": {"color": [1.0, 1.0, 1.0]}}},
+            "font": {"$ref": "#/shared/font"},
+            "size": 24,
+            "bold": true,
+            "shadows": [{"$ref": "#/shared/standard_shadow"}]
+          }]
+        }
+      },
+      "segment": {
+        "position_variants": [
+          {"x": -0.300925925925926, "y": -0.520833333333333},
+          {"x": 0.439, "y": -0.520833333333333}
+        ]
+      },
+      "animation_ref_options": ["#/animation_catalog/fade_in", "#/animation_catalog/opening"]
+    },
+    {
+      "key": "pain_conflict_large",
+      "label": "痛点与反对意见大字",
+      "use_when": "抛出核心困难、错误认知、失败原因或冲突转折。",
+      "examples": ["IP难做"],
+      "material": {
+        "type": "text",
+        "line_spacing": 0.02,
+        "content": {
+          "text": "<TEXT>",
+          "styles": [{
+            "range": [0, "<TEXT_END>"],
+            "fill": {"content": {"solid": {"color": [0.7176470756530762, 0.10980392247438431, 0.10980392247438431]}}},
+            "font": {"$ref": "#/shared/font"},
+            "size": 32,
+            "bold": true,
+            "useLetterColor": true,
+            "shadows": [{"$ref": "#/shared/standard_shadow"}]
+          }]
+        }
+      },
+      "segment": {
+        "clip": {
+          "scale": {"x": 1.0, "y": 1.0},
+          "transform": {"x": 0.0, "y": -0.330729166666667},
+          "flip": {}
+        }
+      },
+      "animation_ref": "#/animation_catalog/shrink_ii"
+    },
+    {
+      "key": "pain_barrage",
+      "label": "弹幕式痛点堆叠",
+      "use_when": "连续列举多个成本、困难或负面后果，制造信息压力。",
+      "examples": ["消耗精气神", "好视频越来越少", "团队束手无策"],
+      "material": {
+        "type": "text",
+        "line_spacing": 0.02,
+        "content": {
+          "text": "<TEXT>",
+          "styles": [{
+            "range": [0, "<TEXT_END>"],
+            "fill": {"content": {"solid": {"color": [1.0, 1.0, 1.0]}}},
+            "font": {"$ref": "#/shared/font"},
+            "size": 15,
+            "shadows": [{"$ref": "#/shared/barrage_shadow"}]
+          }]
+        }
+      },
+      "segment": {
+        "position_variants": [
+          {"x": -0.390776699029126, "y": 0.381991814461119},
+          {"x": 0.359874904155731, "y": 0.180081855388813},
+          {"x": 0.0, "y": 0.668485675306958}
+        ]
+      },
+      "animation_ref": "#/animation_catalog/barrage_scroll"
+    },
+    {
+      "key": "solution_keyword",
+      "label": "解决方案与正向关键词",
+      "use_when": "从问题切换到方法、效率、结果或关键动作。",
+      "examples": ["做创始人IP", "全面提效", "老板"],
+      "material": {
+        "type": "text",
+        "line_spacing": 0.02,
+        "content": {
+          "text": "<TEXT>",
+          "styles": [{
+            "range": [0, "<TEXT_END>"],
+            "fill": {"content": {"solid": {"color": [0.7372549176216125, 1.0, 0.0]}}},
+            "font": {"$ref": "#/shared/font"},
+            "size": "<24_OR_32>",
+            "bold": true,
+            "useLetterColor": true,
+            "shadows": [{"$ref": "#/shared/standard_shadow"}]
+          }]
+        }
+      },
+      "segment": {
+        "clip": {
+          "scale": {"x": 1.0, "y": 1.0},
+          "transform": {"x": 0.0, "y": -0.330846407457936},
+          "flip": {}
+        }
+      },
+      "animation_ref_options": ["#/animation_catalog/reveal_up", "#/animation_catalog/random_rise", "#/animation_catalog/snow_blur"]
+    },
+    {
+      "key": "method_step",
+      "label": "编号方法清单",
+      "use_when": "展示三步法、产品模块、课程章节或能力清单。",
+      "examples": ["1.人物采集", "2.声音克隆", "3.视频矩阵"],
+      "material": {
+        "type": "text",
+        "line_spacing": 0.02,
+        "content": {
+          "text": "<TEXT>",
+          "styles": [{
+            "range": [0, "<TEXT_END>"],
+            "fill": {"content": {"solid": {"color": [0.7372549176216125, 1.0, 0.0]}}},
+            "font": {"$ref": "#/shared/font"},
+            "size": 16,
+            "bold": true,
+            "useLetterColor": true,
+            "shadows": [{"$ref": "#/shared/standard_shadow"}]
+          }]
+        }
+      },
+      "segment": {
+        "build_pattern": [
+          "Create a short animated entrance segment at a side position.",
+          "Continue with static segments after moving each item into its final row.",
+          "Final row y positions for three items are -0.331, -0.469, and -0.607."
+        ]
+      },
+      "animation_ref_options": ["#/animation_catalog/right_assemble", "#/animation_catalog/laser_engrave", "#/animation_catalog/random_rise"]
+    },
+    {
+      "key": "proof_number",
+      "label": "数据与案例背书",
+      "use_when": "突出客户数、案例数、增长数据、营收或验证规模。",
+      "examples": ["6000+"],
+      "material": {
+        "type": "text",
+        "line_spacing": 0.02,
+        "content": {
+          "text": "<TEXT>",
+          "styles": [{
+            "range": [0, "<TEXT_END>"],
+            "fill": {"content": {"solid": {"color": [0.7372549176216125, 1.0, 0.0]}}},
+            "font": {"$ref": "#/shared/font"},
+            "size": 32,
+            "bold": true,
+            "useLetterColor": true,
+            "shadows": [{"$ref": "#/shared/standard_shadow"}]
+          }]
+        }
+      },
+      "segment": {
+        "clip": {
+          "scale": {"x": 1.0, "y": 1.0},
+          "transform": {"x": 0.0, "y": -0.46875},
+          "flip": {}
+        }
+      },
+      "animation_ref": "#/animation_catalog/roll_in"
+    },
+    {
+      "key": "cta_partial_highlight",
+      "label": "结尾行动号召局部高亮",
+      "use_when": "结尾提出落地、领取、咨询、报名或联系等转化动作。",
+      "examples": ["想知道如何落地"],
+      "material": {
+        "type": "text",
+        "line_spacing": 0.02,
+        "content": {
+          "text": "<TEXT>",
+          "styles": [
+            {
+              "range": [0, "<CTA_KEYWORD_START>"],
+              "fill": {"content": {"solid": {"color": [1.0, 1.0, 1.0]}}},
+              "font": {"$ref": "#/shared/font"},
+              "size": 16,
+              "bold": true,
+              "shadows": [{"$ref": "#/shared/standard_shadow"}]
+            },
+            {
+              "range": ["<CTA_KEYWORD_START>", "<TEXT_END>"],
+              "fill": {"content": {"solid": {"color": [0.7372549176216125, 1.0, 0.0]}}},
+              "font": {"$ref": "#/shared/font"},
+              "size": 24,
+              "bold": true,
+              "useLetterColor": true,
+              "shadows": [{"$ref": "#/shared/standard_shadow"}]
+            }
+          ]
+        }
+      },
+      "segment": {
+        "clip": {"$ref": "#/shared/default_clip"}
+      },
+      "animation_ref": "#/animation_catalog/laser_engrave"
+    },
+    {
+      "key": "persistent_topic_header_orange",
+      "label": "顶部常驻双色选题",
+      "subprofile": "orange-high-contrast-editing-education",
+      "use_when": "用对比、价格差或问题句作为选题，并在主要段落持续提醒观众当前主题。",
+      "examples": ["3000和一万的剪辑师\n有什么区别"],
+      "material": {
+        "type": "subtitle",
+        "letter_spacing": -0.1,
+        "line_spacing": 0.02,
+        "content": {
+          "text": "<TEXT>",
+          "styles": [
+            {
+              "range": [0, "<SECOND_LINE_START>"],
+              "fill": {"content": {"solid": {"color": [1.0, 1.0, 1.0]}}},
+              "font": {"$ref": "#/shared/font_hanyi_tianyu"},
+              "size": 17,
+              "bold": true,
+              "shadows": [{"$ref": "#/shared/barrage_shadow"}]
+            },
+            {
+              "range": ["<SECOND_LINE_START>", "<TEXT_END>"],
+              "fill": {"content": {"solid": {"color": [1.0, 0.658823549747467, 0.0]}}},
+              "font": {"$ref": "#/shared/font_hanyi_tianyu"},
+              "size": 17,
+              "bold": true,
+              "useLetterColor": true,
+              "shadows": [{"$ref": "#/shared/barrage_shadow"}]
+            }
+          ]
+        }
+      },
+      "segment": {
+        "clip": {
+          "scale": {"x": 1.009380839887921, "y": 1.009380839887921},
+          "transform": {"x": 0.0, "y": 0.796378311258278},
+          "flip": {}
+        },
+        "build_pattern": "Repeat or split the header across major timeline sections; do not animate every repetition."
+      },
+      "animation_ref": null
+    },
+    {
+      "key": "plain_spoken_subtitle_shadow",
+      "label": "无底板阴影口播字幕",
+      "subprofile": "orange-high-contrast-editing-education",
+      "use_when": "承载普通叙述、连接词和解释句；保持低存在感，把视觉强度留给重点句。",
+      "examples": ["你也敢招啊", "但是我敢肯定", "至于他们的剪辑思路是什么"],
+      "material": {
+        "type": "subtitle",
+        "line_spacing": 0.02,
+        "content": {
+          "text": "<TEXT>",
+          "styles": [{
+            "range": [0, "<TEXT_END>"],
+            "fill": {"content": {"solid": {"color": [1.0, 1.0, 1.0]}}},
+            "font": {"$ref": "#/shared/font_postmodern"},
+            "size": 14,
+            "shadows": [{"$ref": "#/shared/soft_shadow"}]
+          }]
+        }
+      },
+      "segment": {
+        "clip": {
+          "transform": {"x": 0.0, "y": -0.338541666666667},
+          "flip": {}
+        }
+      },
+      "animation_ref": null
+    },
+    {
+      "key": "section_label_fold",
+      "label": "段落对象切换标签",
+      "subprofile": "orange-high-contrast-editing-education",
+      "use_when": "从一个比较对象、案例或章节切换到另一个对象时，短暂抬高并折叠进入。",
+      "examples": ["3,000块的剪辑师"],
+      "material": {
+        "type": "subtitle",
+        "line_spacing": 0.02,
+        "content": {
+          "text": "<TEXT>",
+          "styles": [{
+            "range": [0, "<TEXT_END>"],
+            "fill": {"content": {"solid": {"color": [1.0, 1.0, 1.0]}}},
+            "font": {"$ref": "#/shared/font_postmodern"},
+            "size": 14,
+            "shadows": [{"$ref": "#/shared/soft_shadow"}]
+          }]
+        }
+      },
+      "segment": {
+        "clip": {
+          "transform": {"x": 0.0, "y": -0.205622412008282},
+          "flip": {}
+        }
+      },
+      "animation_ref": "#/animation_catalog/fold"
+    },
+    {
+      "key": "animated_sentence_emphasis_orange",
+      "label": "橙色关键句升级",
+      "subprofile": "orange-high-contrast-editing-education",
+      "use_when": "普通口播中出现结论、判断、能力差距或爆款承诺时，用完整关键句替换基础字幕一拍。",
+      "examples": ["区别肯定很大了", "100%不懂营销", "不明白剪辑的意义", "只会剪映的技术", "能出爆款"],
+      "material": {
+        "type": "subtitle",
+        "letter_spacing": -0.1,
+        "line_spacing": 0.02,
+        "content": {
+          "text": "<TEXT>",
+          "styles": [{
+            "range": [0, "<TEXT_END>"],
+            "fill": {"content": {"solid": {"color": [1.0, 0.658823549747467, 0.0]}}},
+            "font": {"$ref": "#/shared/font_hanyi_tianyu"},
+            "size": 20,
+            "bold": true,
+            "useLetterColor": true,
+            "shadows": [{"$ref": "#/shared/barrage_shadow"}]
+          }]
+        }
+      },
+      "segment": {
+        "clip": {
+          "scale": {"x": 1.009380839887921, "y": 1.009380839887921},
+          "transform": {"x": 0.0, "y": -0.338541666666667},
+          "flip": {}
+        }
+      },
+      "animation_ref_options": [
+        "#/animation_catalog/blur_glow",
+        "#/animation_catalog/shrink",
+        "#/animation_catalog/jump_in",
+        "#/animation_catalog/glow_blur",
+        "#/animation_catalog/shout_wave"
+      ]
+    },
+    {
+      "key": "paired_micro_bubble_tags",
+      "label": "左右配对气泡标签",
+      "subprofile": "orange-high-contrast-editing-education",
+      "use_when": "同一句里并列展示两个缺失能力、对比维度或短标签，左右各出现一个气泡。",
+      "examples": ["关键信息", "音效"],
+      "variants": [
+        {
+          "name": "left_dark_bubble",
+          "material": {
+            "type": "subtitle",
+            "content": {
+              "text": "<TEXT>",
+              "styles": [{
+                "range": [0, "<TEXT_END>"],
+                "fill": {"content": {"solid": {"color": [1.0, 1.0, 1.0]}}},
+                "font": {"$ref": "#/shared/font_postmodern"},
+                "size": 12,
+                "shadows": [{"$ref": "#/shared/soft_shadow"}]
+              }]
+            }
+          },
+          "position": {"x": -0.514348770970803, "y": -0.1894733436853, "scale": 0.884984628554829},
+          "animation_ref": "#/animation_catalog/jump_in",
+          "text_shape_ref": "#/text_shape_catalog/conversation_77"
+        },
+        {
+          "name": "right_light_bubble",
+          "material": {
+            "type": "subtitle",
+            "content": {
+              "text": "<TEXT>",
+              "styles": [{
+                "range": [0, "<TEXT_END>"],
+                "fill": {"content": {"solid": {"color": [0.0, 0.0, 0.0]}}},
+                "font": {"$ref": "#/shared/font_postmodern"},
+                "size": 12,
+                "useLetterColor": true
+              }]
+            }
+          },
+          "position": {"x": 0.514348800773126, "y": -0.077672101449275, "scale": 0.884984628554829},
+          "animation_ref": "#/animation_catalog/mild_zoom",
+          "text_shape_ref": "#/text_shape_catalog/conversation_78"
+        }
+      ]
+    },
+    {
+      "key": "oversized_keyword_hit_yellow",
+      "label": "暖黄超大关键词重击",
+      "subprofile": "orange-high-contrast-editing-education",
+      "use_when": "在痛点总结或转折处，把四到六字结论独立放大，形成一次强节奏停顿。",
+      "examples": ["没有重点"],
+      "material": {
+        "type": "subtitle",
+        "line_spacing": 0.02,
+        "content": {
+          "text": "<TEXT>",
+          "styles": [{
+            "range": [0, "<TEXT_END>"],
+            "fill": {"content": {"solid": {"color": [1.0, 0.7490196228027344, 0.09019608050584793]}}},
+            "font": {"$ref": "#/shared/font_hanyi_tianyu"},
+            "size": 41.5098991394043,
+            "useLetterColor": true,
+            "shadows": [{"$ref": "#/shared/soft_shadow"}]
+          }]
+        }
+      },
+      "segment": {
+        "clip": {
+          "transform": {"x": 0.0, "y": 0.69854469995321},
+          "flip": {}
+        }
+      },
+      "animation_ref": "#/animation_catalog/snow_blur"
+    },
+    {
+      "key": "next_episode_vertical_teaser",
+      "label": "右侧竖排下期预告",
+      "subprofile": "orange-high-contrast-editing-education",
+      "use_when": "结尾不直接给完答案，用下期预告或悬念引导追更。",
+      "examples": ["下期揭秘"],
+      "material": {
+        "type": "subtitle",
+        "typesetting": 1,
+        "alignment": 3,
+        "line_spacing": 0.02,
+        "content": {
+          "text": "<TEXT>",
+          "styles": [{
+            "range": [0, "<TEXT_END>"],
+            "fill": {"content": {"solid": {"color": [1.0, 1.0, 1.0]}}},
+            "font": {"$ref": "#/shared/font_hanyi_tianyu"},
+            "size": 41.5098991394043,
+            "useLetterColor": true,
+            "shadows": [{"$ref": "#/shared/soft_shadow"}]
+          }]
+        }
+      },
+      "segment": {
+        "clip": {
+          "transform": {"x": 0.663692951202393, "y": -0.141206852841822},
+          "flip": {}
+        }
+      },
+      "animation_ref": "#/animation_catalog/snow_blur"
+    },
+    {
+      "key": "startup_plain_narrative_subtitle",
+      "label": "创业分享基础叙事字幕",
+      "subprofile": "red-yellow-startup-opportunity-warning",
+      "use_when": "承载普通解释、排序、案例铺垫和过渡语；全片保持统一，作为红黄强调字的低强度底层。",
+      "examples": ["Deepseek", "目前", "只有3种人", "会深度使用Deepseek"],
+      "material": {
+        "type": "subtitle",
+        "line_spacing": 0.02,
+        "content": {
+          "text": "<TEXT>",
+          "styles": [{
+            "range": [0, "<TEXT_END>"],
+            "fill": {"content": {"solid": {"color": [1.0, 1.0, 1.0]}}},
+            "font": {"$ref": "#/shared/font_deyi_black"},
+            "size": 12,
+            "shadows": [{"$ref": "#/shared/barrage_shadow"}]
+          }]
+        }
+      },
+      "segment": {
+        "clip": {
+          "transform": {"x": 0.0, "y": -0.390625},
+          "flip": {}
+        }
+      },
+      "animation_ref_options": [null, "#/animation_catalog/roll_in"]
+    },
+    {
+      "key": "startup_warning_red_oversized",
+      "label": "纯红超大风险警示",
+      "subprofile": "red-yellow-startup-opportunity-warning",
+      "use_when": "开场1至3秒抛出骗局、风险、错误或上当警告，覆盖人物上半区形成强打断。",
+      "examples": ["割韭菜", "别再\n上当"],
+      "material": {
+        "type": "subtitle",
+        "line_spacing": 0.02,
+        "content": {
+          "text": "<TEXT>",
+          "styles": [{
+            "range": [0, "<TEXT_END>"],
+            "fill": {"content": {"solid": {"color": [1.0, 0.0, 0.0]}}},
+            "font": {"$ref": "#/shared/font_zaozigongfang_junya"},
+            "size": 64,
+            "useLetterColor": true,
+            "shadows": [{"$ref": "#/shared/soft_shadow"}]
+          }]
+        }
+      },
+      "variants": [
+        {
+          "name": "single_line_glow",
+          "position": {"x": 0.0, "y": 0.656188174853661},
+          "animation_ref": "#/animation_catalog/glow_blur_standard"
+        },
+        {
+          "name": "two_line_slide",
+          "material_overrides": {"letter_spacing": 1.0},
+          "position": {"x": 0.0, "y": 0.496324181556702},
+          "animation_ref": "#/animation_catalog/slide_down"
+        }
+      ]
+    },
+    {
+      "key": "startup_opportunity_label_pale_yellow",
+      "label": "淡黄机会类别标签",
+      "subprofile": "red-yellow-startup-opportunity-warning",
+      "use_when": "介绍赛道、赚钱角色、机会类别或阶段性承诺时，把核心名词升级成32至42号淡黄色大字。",
+      "examples": ["AI培训", "包赚不赔", "自媒体行业"],
+      "material": {
+        "type": "subtitle",
+        "line_spacing": 0.02,
+        "content": {
+          "text": "<TEXT>",
+          "styles": [{
+            "range": [0, "<TEXT_END>"],
+            "fill": {"content": {"solid": {"color": [1.0, 0.9607843160629272, 0.5372549295425415]}}},
+            "font": {"$ref": "#/shared/font_zaozigongfang_junya"},
+            "size": "<32_TO_42>",
+            "useLetterColor": true,
+            "shadows": [{"$ref": "#/shared/soft_shadow"}]
+          }]
+        }
+      },
+      "segment": {
+        "clip": {
+          "transform": {"x": 0.0, "y": -0.390625},
+          "flip": {}
+        }
+      },
+      "animation_ref_options": [
+        "#/animation_catalog/new_year_typewriter",
+        "#/animation_catalog/ice_snow_float",
+        "#/animation_catalog/laser_engrave"
+      ]
+    },
+    {
+      "key": "startup_combination_formula_card",
+      "label": "红白组合公式卡",
+      "subprofile": "red-yellow-startup-opportunity-warning",
+      "use_when": "展示行业加AI、能力加工具或两个概念组合成新机会的公式。",
+      "examples": ["疗愈宠物+AI"],
+      "material": {
+        "type": "subtitle",
+        "line_spacing": 0.02,
+        "background_alpha": 0.550884955752212,
+        "background_color": "#000000",
+        "background_width": 0.0,
+        "background_height": 0.0,
+        "background_round_radius": 0.1,
+        "background_style": 1,
+        "content": {
+          "text": "<TEXT>",
+          "styles": [
+            {
+              "range": [0, "<PLUS_OR_CONNECTOR_START>"],
+              "fill": {"content": {"solid": {"color": [0.7176470756530762, 0.10980392247438431, 0.10980392247438431]}}},
+              "font": {"$ref": "#/shared/font_zaozigongfang_junya"},
+              "size": 18,
+              "useLetterColor": true
+            },
+            {
+              "range": ["<PLUS_OR_CONNECTOR_START>", "<TEXT_END>"],
+              "fill": {"content": {"solid": {"color": [1.0, 1.0, 1.0]}}},
+              "font": {"$ref": "#/shared/font_zaozigongfang_junya"},
+              "size": 18,
+              "useLetterColor": true
+            }
+          ]
+        }
+      },
+      "segment": {
+        "clip": {
+          "transform": {"x": 0.0, "y": 0.683217302878598},
+          "flip": {}
+        }
+      },
+      "animation_ref": "#/animation_catalog/reveal_right"
+    },
+    {
+      "key": "startup_result_hit_coral",
+      "label": "珊瑚红结果重击",
+      "subprofile": "red-yellow-startup-opportunity-warning",
+      "use_when": "组合公式或机会案例出现后，用两到四字结果词完成视觉兑现。",
+      "examples": ["变现"],
+      "material": {
+        "type": "subtitle",
+        "letter_spacing": 0.2,
+        "line_spacing": 0.02,
+        "content": {
+          "text": "<TEXT>",
+          "styles": [{
+            "range": [0, "<TEXT_END>"],
+            "fill": {"content": {"solid": {"color": [0.9960784316062927, 0.321568638086319, 0.321568638086319]}}},
+            "font": {"$ref": "#/shared/font_zaozigongfang_junya"},
+            "size": 52,
+            "useLetterColor": true,
+            "shadows": [{"$ref": "#/shared/soft_shadow"}]
+          }]
+        }
+      },
+      "segment": {
+        "clip": {
+          "transform": {"x": 0.0, "y": 0.381590269086358},
+          "flip": {}
+        }
+      },
+      "animation_ref": "#/animation_catalog/star_sparkle"
+    },
+    {
+      "key": "startup_identity_ribbon_red",
+      "label": "深红角色身份条",
+      "subprofile": "red-yellow-startup-opportunity-warning",
+      "use_when": "介绍第三类人、岗位角色、普通人可选路径或目标身份。",
+      "examples": ["AI工具打工人"],
+      "material": {
+        "type": "subtitle",
+        "line_spacing": 0.02,
+        "background_color": "#ffffff",
+        "background_width": 0.0,
+        "background_height": 0.0,
+        "background_round_radius": 0.1,
+        "background_style": 1,
+        "content": {
+          "text": "<TEXT>",
+          "styles": [{
+            "range": [0, "<TEXT_END>"],
+            "fill": {"content": {"solid": {"color": [0.7176470756530762, 0.10980392247438431, 0.10980392247438431]}}},
+            "font": {"$ref": "#/shared/font_zaozigongfang_junya"},
+            "size": 18,
+            "useLetterColor": true
+          }]
+        }
+      },
+      "segment": {
+        "clip": {
+          "transform": {"x": 0.0, "y": -0.520833333333333},
+          "flip": {}
+        }
+      },
+      "animation_ref": "#/animation_catalog/reveal_right",
+      "portability_note": "The source stores background_color without background_alpha. Preserve this only when matching the source; otherwise set alpha deliberately after previewing."
+    },
+    {
+      "key": "startup_chat_bubble_cta",
+      "label": "会话气泡咨询CTA",
+      "subprofile": "red-yellow-startup-opportunity-warning",
+      "use_when": "结尾邀请私聊、咨询、领取方案或结合自身行业落地。",
+      "examples": ["找我聊聊"],
+      "material": {
+        "type": "subtitle",
+        "line_spacing": 0.02,
+        "content": {
+          "text": "<TEXT>",
+          "styles": [{
+            "range": [0, "<TEXT_END>"],
+            "fill": {"content": {"solid": {"color": [1.0, 1.0, 1.0]}}},
+            "font": {"$ref": "#/shared/font_deyi_black"},
+            "size": 12,
+            "shadows": [{"$ref": "#/shared/barrage_shadow"}]
+          }]
+        }
+      },
+      "segment": {
+        "clip": {
+          "transform": {"x": 0.171492204899777, "y": -0.222915362953692},
+          "flip": {}
+        }
+      },
+      "animation_ref": "#/animation_catalog/jump_in",
+      "text_shape_ref": "#/text_shape_catalog/conversation_76"
+    }
+  ]
+}

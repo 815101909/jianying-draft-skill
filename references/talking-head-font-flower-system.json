@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "profile": "talking_head_font_and_flower_text_selector",
+  "purpose": "Select fonts and Jianying flower-text effects from semantic role, genre, frame conditions, and local resource availability. Use automatically for styled talking-head captions and overlays.",
+  "source_audit": {
+    "scanned_at": "2026-07-23",
+    "method": "extract_text_style_catalog.py --top-level-only",
+    "libraries": {
+      "C:/drafts/talking-head-library": {
+        "projects": 73,
+        "text_segments": 2681,
+        "style_clusters": 1384,
+        "nondefault_font_segments": 2675,
+        "nondefault_font_ratio": 0.998,
+        "nondefault_font_files": 33,
+        "flower_text_segments": 38,
+        "flower_text_ratio": 0.014,
+        "flower_text_projects": 17,
+        "text_shape_segments": 30,
+        "text_shape_projects": 13
+      },
+      "C:/drafts/original-edit-library": {
+        "projects_with_text": 38,
+        "text_segments": 1358,
+        "style_clusters": 663,
+        "nondefault_font_segments": 1205,
+        "nondefault_font_ratio": 0.887,
+        "nondefault_font_files": 63,
+        "flower_text_segments": 178,
+        "flower_text_ratio": 0.131,
+        "flower_text_projects": 17,
+        "text_shape_segments": 0
+      }
+    },
+    "combined_nondefault_font_files": 83,
+    "interpretation": [
+      "Custom font choice is part of the base visual identity, not an optional finishing touch.",
+      "Ordinary talking-head templates use flower text sparsely; high-packaging edits use it more often but still on selected overlays rather than every spoken subtitle.",
+      "Font switching and flower text are separate decisions. A keyword may change font without receiving effectStyle, and flower text still needs a compatible font hierarchy."
+    ]
+  },
+  "automatic_selection_pipeline": [
+    "Inspect the existing draft's fonts, canvas, speaker position, subtitle area, and resolvable local font/effect resources.",
+    "Classify each spoken beat as body, hook, identity, keyword, conflict, proof_or_number, method_step, turn, quote, result, CTA, emotion, or annotation.",
+    "Choose one base font, one display font, and only when justified one numeric_or_latin font. Do not exceed three font families in one video.",
+    "Keep continuous spoken subtitles in the base font. Switch only short overlays or partial keyword ranges to the display or numeric font.",
+    "Decide flower text after font role, color, size, position, and motion. Use it only when it adds a semantic function that plain typography cannot carry as clearly.",
+    "Resolve the complete source effect material and local resource path. If unresolved, fall back to font, fill, stroke, shadow, background, and portable keyframes.",
+    "Audit density, repeated effect IDs, collisions, and readability before saving."
+  ],
+  "font_roles": {
+    "base_authority_sans": {
+      "use_when": ["business", "knowledge_payment", "law", "finance", "method", "stable narration"],
+      "priority": ["DouyinSansBold.otf", "特黑体-思源黑体1号.otf", "得意黑.ttf"],
+      "fallback": ["Microsoft YaHei Bold", "Source Han Sans Bold"],
+      "traits": "Clear, strong, modern, compact."
+    },
+    "base_authority_serif": {
+      "use_when": ["founder story", "expert quote", "documentary", "education", "reflective conclusion"],
+      "priority": ["SourceHanSerifCN-Heavy.otf", "思源宋体-Bold.otf", "Aa研宋.ttf"],
+      "fallback": ["Source Han Serif Bold", "SimSun Bold"],
+      "traits": "Credible, editorial, cinematic."
+    },
+    "display_viral": {
+      "use_when": ["hook", "hard conclusion", "conflict", "result", "short command"],
+      "priority": ["得意黑.ttf", "FZCuJinLJW.ttf", "特黑体-思源黑体1号.otf", "新青年体.ttf"],
+      "traits": "Large counterforms and strong silhouette for short phrases."
+    },
+    "display_editorial": {
+      "use_when": ["concept word", "social observation", "finance", "news", "chapter title"],
+      "priority": ["后现代体.otf", "知新体.ttf", "SourceHanSerifCN-Heavy.otf"],
+      "traits": "Restrained, conceptual, high-contrast."
+    },
+    "display_humanist": {
+      "use_when": ["emotion", "female growth", "family", "beauty", "lifestyle", "personal reflection"],
+      "priority": ["造字工房俊雅体.ttf", "雅月体.ttf", "阳煦体.otf", "HelloFont ID YouQiTi.ttf"],
+      "traits": "Human, warm, handwritten or literary."
+    },
+    "display_playful": {
+      "use_when": ["variety", "reaction", "light science", "cute", "youth"],
+      "priority": ["圆体-汉仪中圆简.ttf", "新青年体.ttf", "仓耳与墨W05.ttf", "得意黑.ttf"],
+      "traits": "Rounded, lively, tolerant of bounce motion."
+    },
+    "numeric_or_latin": {
+      "use_when": ["amount", "percentage", "date", "rank", "English acronym"],
+      "priority": ["FZCuJinLJW.ttf", "DINNextW1G-Black.otf", "特黑体-思源黑体1号.otf"],
+      "traits": "Dense, tabular-looking, legible at large scale."
+    }
+  },
+  "observed_font_evidence": [
+    {"font": "得意黑.ttf", "segments": 580, "role": "viral keyword, conflict, emphatic conclusion"},
+    {"font": "SourceHanSerifCN-Heavy.otf", "segments": 571, "role": "authority, story, quote, cinematic phrase"},
+    {"font": "造字工房俊雅体.ttf", "segments": 372, "role": "humanist viewpoint, education, beauty, emotional keyword"},
+    {"font": "DouyinSansBold.otf", "segments": 328, "role": "clean modern body or business emphasis"},
+    {"font": "知新体.ttf", "segments": 294, "role": "editorial concept word and social observation"},
+    {"font": "特黑体-思源黑体1号.otf", "segments": 292, "role": "data, strong title, hard conclusion"},
+    {"font": "思源宋体-Bold.otf", "segments": 239, "role": "knowledge, authority, restrained emphasis"},
+    {"font": "FZCuJinLJW.ttf", "segments": 212, "role": "large number, kinetic keyword, result"},
+    {"font": "Aa研宋.ttf", "segments": 200, "role": "quote, emotion, literary authority"},
+    {"font": "后现代体.otf", "segments": 124, "role": "news, finance, concept, giant chapter word"},
+    {"font": "HelloFont ID YouQiTi.ttf", "segments": 98, "role": "creator, lifestyle, youthful card"},
+    {"font": "细体-思源黑体7号.otf", "segments": 97, "role": "annotation, identity, cinematic negative space"},
+    {"font": "新青年体.ttf", "segments": 83, "role": "reaction, variety, rapid youthful emphasis"},
+    {"font": "圆体-汉仪中圆简.ttf", "segments": 56, "role": "playful, health, beauty, light explanation"},
+    {"font": "雅月体.ttf", "segments": 48, "role": "personal growth and intimate reflection"}
+  ],
+  "flower_text_policy": {
+    "eligible_roles": [
+      "opening_hook",
+      "identity_reveal",
+      "conflict_or_warning",
+      "proof_or_number",
+      "turn",
+      "result",
+      "chapter",
+      "CTA",
+      "strong_emotion"
+    ],
+    "ineligible_by_default": [
+      "continuous spoken subtitle",
+      "connector words",
+      "long explanatory sentence",
+      "source citation",
+      "low-confidence ASR text",
+      "every repeated keyword"
+    ],
+    "maximum_text_length": {
+      "preferred_chinese_characters": 8,
+      "soft_limit_chinese_characters": 14,
+      "exception": "A two-line quote may exceed the soft limit only when the source effect is demonstrably readable at the target canvas."
+    },
+    "density_targets": {
+      "standard_talking_head": "About 1-4% of text segments; usually one strong flower-text beat per 15-30 seconds.",
+      "knowledge_payment_or_business": "About 2-6%; prioritize hook, proof, method result, and CTA.",
+      "high_packaging_or_yichuang": "About 8-13%; vary font-only, background-card, and flower-text emphasis instead of making every hit identical.",
+      "documentary_or_emotional": "About 1-5%; prefer serif typography and restrained cinematic effects."
+    },
+    "repetition_limits": [
+      "Do not use one flower effect ID as the universal fallback.",
+      "Do not repeat the same flower effect on adjacent emphasis beats.",
+      "Use at most two flower-effect families in a short talking-head video unless the format is explicitly variety/high-packaging.",
+      "Prefer silence and plain typography over an effect that does not match the semantic beat."
+    ],
+    "composition_order": [
+      "base font",
+      "display or numeric font",
+      "fill and partial range color",
+      "stroke/shadow/background",
+      "flower effect",
+      "motion",
+      "optional sound"
+    ]
+  },
+  "observed_flower_effects": {
+    "talking_head_library": [
+      {"effect_style_id": "7127827287826779428", "segments": 16, "projects": 9, "observed_text": ["消失了", "被人瞧不起", "简单"], "suggested_role": "short emotional or result keyword"},
+      {"effect_style_id": "6896141886055042318", "segments": 6, "projects": 2, "observed_text": ["口播剪辑常用", "网感字体", "适合小白"], "suggested_role": "creator or instructional label"},
+      {"effect_style_id": "6927160144421784832", "segments": 5, "projects": 2, "observed_text": ["知识付费", "中医养生", "美学装修"], "suggested_role": "industry or chapter label"},
+      {"effect_style_id": "7160601239800040712", "segments": 5, "projects": 3, "observed_text": ["联合声明", "侮辱人格", "单兵作战"], "suggested_role": "cinematic authority or conflict phrase"},
+      {"effect_style_id": "7127540233750596871", "segments": 1, "projects": 1, "suggested_role": "emotional story sentence; reuse only after visual verification"},
+      {"effect_style_id": "7127838730483748132", "segments": 1, "projects": 1, "suggested_role": "identity/background phrase; low-confidence evidence"},
+      {"effect_style_id": "7404665994372861223", "segments": 1, "projects": 1, "suggested_role": "tutorial annotation; exclude from audience export by default"},
+      {"effect_style_id": "7404314496833015077", "segments": 1, "projects": 1, "suggested_role": "conflict phrase; low-confidence evidence"},
+      {"effect_style_id": "6896137661153594632", "segments": 1, "projects": 1, "suggested_role": "dramatic negative keyword; low-confidence evidence"},
+      {"effect_style_id": "7166470216396901664", "segments": 1, "projects": 1, "suggested_role": "large number; low-confidence evidence"}
+    ],
+    "high_packaging_library": [
+      {"effect_style_id": "7160601239800040712", "segments": 48, "projects": 4, "suggested_role": "cinematic serif phrase, authority, question, result"},
+      {"effect_style_id": "7272741033979546943", "segments": 28, "projects": 1, "suggested_role": "internal tutorial label; exclude from audience export by default"},
+      {"effect_style_id": "7187615351868280121", "segments": 10, "projects": 2, "suggested_role": "concept or scene keyword"},
+      {"effect_style_id": "7181336409813372197", "segments": 10, "projects": 4, "suggested_role": "explanatory keyword or quote accent"},
+      {"effect_style_id": "7467426470714051902", "segments": 8, "projects": 1, "suggested_role": "money, goal, or large-number headline"},
+      {"effect_style_id": "7405244303586397476", "segments": 7, "projects": 1, "suggested_role": "finance or social-observation keyword"},
+      {"effect_style_id": "6896144074487696654", "segments": 6, "projects": 5, "suggested_role": "chapter/ending annotation; filter tutorial wording"},
+      {"effect_style_id": "7351316503771368713", "segments": 5, "projects": 1, "suggested_role": "system or conceptual headline"},
+      {"effect_style_id": "7371395905561365770", "segments": 5, "projects": 1, "suggested_role": "comedy laughter or reaction"},
+      {"effect_style_id": "7404314496833015077", "segments": 2, "projects": 1, "suggested_role": "pain/problem keyword"},
+      {"effect_style_id": "7166483277631540492", "segments": 2, "projects": 1, "suggested_role": "positive value keyword"},
+      {"effect_style_id": "7405510219633036555", "segments": 2, "projects": 1, "suggested_role": "break/reveal or strong transformation"},
+      {"effect_style_id": "7406159958045232435", "segments": 1, "projects": 1, "suggested_role": "temperature or numeric badge; low-confidence evidence"},
+      {"effect_style_id": "7404690754590821632", "segments": 1, "projects": 1, "suggested_role": "result/state badge; low-confidence evidence"},
+      {"effect_style_id": "7405202500493610275", "segments": 1, "projects": 1, "suggested_role": "negative emotion; low-confidence evidence"},
+      {"effect_style_id": "7405039371037986089", "segments": 1, "projects": 1, "suggested_role": "numbered method step; low-confidence evidence"},
+      {"effect_style_id": "7200660554552331575", "segments": 1, "projects": 1, "suggested_role": "problem/state; low-confidence evidence"},
+      {"effect_style_id": "6896143808942066952", "segments": 1, "projects": 1, "suggested_role": "object or product keyword; low-confidence evidence"},
+      {"effect_style_id": "6896138254819577102", "segments": 1, "projects": 1, "suggested_role": "money desire or motivation; low-confidence evidence"},
+      {"effect_style_id": "7465177921276136766", "segments": 1, "projects": 1, "suggested_role": "single-character power hit; low-confidence evidence"}
+    ]
+  },
+  "text_shape_policy": {
+    "use_when": ["CTA", "question", "identity tag", "method label", "warning", "short proof badge"],
+    "observed_talking_head_projects": 13,
+    "observed_segments": 30,
+    "rule": "Treat text_shape as a separate background/label role, not as flower text. Do not stack text_shape, heavy flower text, and heavy motion on the same ordinary beat."
+  },
+  "implementation_rules": [
+    "Font file names are priorities, not proof that the font exists. Resolve an installed or existing draft font path and preserve the role when substituting.",
+    "Copying an effect_style_id alone is invalid. Create or reuse the matching materials.effects item, give it a fresh runtime id, attach that id through the text segment's extra_material_refs, and keep content.styles[*].effectStyle.id aligned with the source resource id.",
+    "When the exact effect resource cannot be resolved locally, do not invent a path or silently attach a broken effect. Use a portable typography fallback.",
+    "For partial keyword styling, compute character ranges from the final punctuation-cleaned text before writing content.styles.",
+    "Suppress duplicated base subtitles while a large overlay repeats the same phrase.",
+    "Preview at least the hook, first flower-text beat, densest overlay section, and ending."
+  ],
+  "quality_gate": [
+    "Base captions remain readable without relying on the flower effect.",
+    "No more than three font families are used.",
+    "Flower-text density matches the selected output family.",
+    "Tutorial labels and source branding are filtered from audience-facing output.",
+    "Every attached font and effect resource resolves locally or has a deliberate fallback.",
+    "No unresolved material_id or extra_material_refs remain."
+  ]
+}

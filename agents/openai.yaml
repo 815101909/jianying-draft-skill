@@ -1,0 +1,7 @@
+interface:
+  display_name: "剪映草稿"
+  short_description: "生成、解析和修复剪映草稿，编排字幕包装并检查或渲染基础视频"
+  default_prompt: "使用 $jianying-draft 分析输入，制作或修复剪映草稿，执行适用的检查和基础渲染，并报告输出与验证范围。"
+
+policy:
+  allow_implicit_invocation: true
